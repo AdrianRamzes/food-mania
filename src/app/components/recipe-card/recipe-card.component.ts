@@ -11,6 +11,7 @@ export class RecipeCardComponent implements OnInit {
   @Input()
   recipe: Recipe;
 
+  @Input()
   amount: number = 0;
 
   @Output()

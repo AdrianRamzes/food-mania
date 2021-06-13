@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from './models/recipe.model';
 
+import { recipes } from "src/app/data/recipies.data";
 import * as _ from 'lodash';
 
 @Component({
@@ -10,43 +11,33 @@ import * as _ from 'lodash';
 })
 export class AppComponent implements OnInit {
 
-  recipiesSum = 0;
+  public get recipes(): Recipe[] {
+    return recipes;
+  };
 
-  recipes = [
-    {
-      id: 1,
-      title: 'title #1',
-      description: 'description',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-    } as Recipe,
-    {
-      id: 2,
-      title: 'title #2',
-      description: 'description',
-      imageUrl: 'https://images.unsplash.com/photo-1605190557072-1fe6a230ee65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib'
-    } as Recipe,
-    {
-      id: 3,
-      title: 'title #3',
-      description: 'description',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg'
-    } as Recipe,
-    {
-      id: 4,
-      title: 'title #4',
-      description: 'description',
-      imageUrl: 'https://images.unsplash.com/photo-1605190557072-1fe6a230ee65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib'
-    } as Recipe,
-  ];
+  recipiesSum = 0;
+  recipiesAmounts: number[] = [];
+
+  private readonly storageKey = 'recipiesAmounts';
 
   ngOnInit() {
+    const jsonStr = localStorage.getItem(this.storageKey);
+    if (jsonStr) {
+      this.recipiesAmounts = JSON.parse(jsonStr);
+    } else {
+      recipes.forEach(r => {
+        this.recipiesAmounts.push(0);
+      });
+    }
+    this.recipiesSum = _.sum(this.recipiesAmounts);
   }
 
   onCartClick() {
 
   }
 
-  onSelectedRecipiesChanged(event: Map<number, number>) {
-    this.recipiesSum = _.sum(Array.from(event.values()));
+  onRecipiesAmountsChanged(event: number[]) {
+    this.recipiesSum = _.sum(event);
+    localStorage.setItem(this.storageKey, JSON.stringify(event));
   }
 }

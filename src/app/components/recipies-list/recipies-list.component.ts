@@ -11,10 +11,11 @@ export class RecipiesListComponent implements OnInit {
   @Input()
   recipies: Recipe[];
 
-  @Output()
-  selectedRecipiesChanged = new EventEmitter<Map<Recipe, number>>();
+  @Input()
+  recipiesAmounts: number[];
 
-  private selectedRecipies = new Map<Recipe, number>();
+  @Output()
+  recipiesAmountsChanged = new EventEmitter<number[]>();
 
   constructor() { }
 
@@ -22,10 +23,7 @@ export class RecipiesListComponent implements OnInit {
   }
 
   onRecipeAmountChanged(event: [Recipe, number]) {
-    this.selectedRecipies.set(event[0], event[1]);
-    if (event[1] <= 0) {
-      this.selectedRecipies.delete(event[0]);
-    }
-    this.selectedRecipiesChanged.emit(this.selectedRecipies);
+    this.recipiesAmounts[event[0].id] = Math.max(event[1], 0);
+    this.recipiesAmountsChanged.emit(this.recipiesAmounts);
   }
 }

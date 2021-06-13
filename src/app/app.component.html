@@ -3,5 +3,6 @@
   </mat-icon>
 </button>
 <app-recipies-list [recipies]="recipes"
-  (selectedRecipiesChanged)="onSelectedRecipiesChanged($event)">
+  [recipiesAmounts]="recipiesAmounts"
+  (recipiesAmountsChanged)="onRecipiesAmountsChanged($event)">
 </app-recipies-list>
