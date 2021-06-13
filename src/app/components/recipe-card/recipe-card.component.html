@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-header>{{recipe.title}}</mat-card-header>
+    <img mat-card-image [src]="recipe.imageUrl" alt="Photo of a Shiba Inu">
+    <mat-card-content>{{recipe.description}}</mat-card-content>
+    <mat-card-actions>
+        <div class="buttons-panel">
+            <button mat-mini-fab color="basic" (click)="onMinusClick()"
+                [disabled]="amount<=0">
+                <mat-icon>remove</mat-icon>
+            </button>
+            <p>{{amount}}</p>
+            <button mat-mini-fab color="basic" (click)="onPlusClick()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </mat-card-actions>
+</mat-card>
