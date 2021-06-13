@@ -42,11 +42,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelectedRecipiesChanged(event: Map<Recipe, number>) {
-    console.log('selected Recipies:');
-    for (const entry of event.entries()) {
-      console.log(`${entry[0].title}, ${entry[1]}`);
-    }
+  onCartClick() {
+
+  }
+
+  onSelectedRecipiesChanged(event: Map<number, number>) {
     this.recipiesSum = _.sum(Array.from(event.values()));
   }
 }
