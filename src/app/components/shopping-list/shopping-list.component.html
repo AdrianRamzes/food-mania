@@ -13,4 +13,8 @@
     </mat-list-item>
     <mat-divider></mat-divider>
     <div mat-subheader>Products</div>
+    <mat-list-item *ngFor="let entry of productsList">
+        <div mat-line>{{entry[0].name}}</div>
+        <div *ngIf="entry[1] > 0" mat-line>{{entry[1]}}</div>
+    </mat-list-item>
 </mat-list>

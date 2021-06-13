@@ -1,11 +1,9 @@
+import { Product } from "src/app/models/product.model";
+
 export class Recipe {
     public readonly id: number;
     public readonly title: string;
     public readonly description: string;
     public readonly imageUrl: string;
-
-    constructor(id: number, title: string) {
-        this.id = id;
-        this.title = title;
-    }
+    public readonly products: [number, number][];
 }
