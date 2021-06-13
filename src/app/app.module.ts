@@ -15,15 +15,15 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
-import { RecipiesListComponent } from './components/recipies-list/recipies-list.component';
-import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
+import { RecipiesComponent } from './recipies/recipies.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeCardComponent,
-    RecipiesListComponent,
-    ShoppingListComponent,
+    RecipiesComponent,
+    ShoppingComponent,
   ],
   imports: [
     AppRoutingModule,

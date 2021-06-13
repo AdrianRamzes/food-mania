@@ -22,20 +22,18 @@ export class RecipeCardComponent implements OnInit {
   }
 
   @Output()
-  amountChanged = new EventEmitter<[Recipe, number]>();
-
-  constructor() { }
+  amountChange = new EventEmitter<[Recipe, number]>();
 
   ngOnInit(): void {
   }
 
   onMinusClick(): void {
     this.amount = Math.max(this.amount - 1, 0);
-    this.amountChanged.emit([this.recipe, this.amount]);
+    this.amountChange.emit([this.recipe, this.amount]);
   }
 
   onPlusClick(): void {
     this.amount++;
-    this.amountChanged.emit([this.recipe, this.amount]);
+    this.amountChange.emit([this.recipe, this.amount]);
   }
 }

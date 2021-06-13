@@ -13,13 +13,13 @@
   </button>
 </mat-toolbar>
 <div class="main-view">
-  <app-recipies-list *ngIf="currentView == 'recipies'" [recipies]="recipes"
+  <app-recipies *ngIf="currentView == 'recipies'" [recipies]="recipes"
     [recipiesAmounts]="recipiesAmounts"
     (recipiesAmountsChanged)="onRecipiesAmountsChanged($event)">
-  </app-recipies-list>
-  <app-shopping-list *ngIf="currentView == 'shopping-list'" [recipies]="recipes"
+  </app-recipies>
+  <app-shopping *ngIf="currentView == 'shopping-list'" [recipies]="recipes"
     (addRecipe)="onAddRecipeClick($event)"
     (removeRecipe)="onRemoveRecipeClick($event)"
     [recipiesAmounts]="recipiesAmounts">
-  </app-shopping-list>
+  </app-shopping>
   </div>

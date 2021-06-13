@@ -6,11 +6,11 @@ import { Product } from 'src/app/models/product.model';
 import { Recipe } from 'src/app/models/recipe.model';
 
 @Component({
-  selector: 'app-shopping-list',
-  templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.scss']
+  selector: 'app-shopping',
+  templateUrl: './shopping.component.html',
+  styleUrls: ['./shopping.component.scss']
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingComponent implements OnInit {
 
   @Input()
   recipies: Recipe[];

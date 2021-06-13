@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 
 @Component({
-  selector: 'app-recipies-list',
-  templateUrl: './recipies-list.component.html',
-  styleUrls: ['./recipies-list.component.scss']
+  selector: 'app-recipies',
+  templateUrl: './recipies.component.html',
+  styleUrls: ['./recipies.component.scss']
 })
-export class RecipiesListComponent implements OnInit {
+export class RecipiesComponent implements OnInit {
 
   @Input()
   recipies: Recipe[];
