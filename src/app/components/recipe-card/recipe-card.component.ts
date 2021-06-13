@@ -11,29 +11,29 @@ export class RecipeCardComponent implements OnInit {
   @Input()
   recipe: Recipe;
 
-  private _amount: number = 0;
+  private _count: number = 0;
   @Input()
-  set amount(value: number) {
-    this._amount = value ?? 0;
+  set count(value: number) {
+    this._count = value ?? 0;
   };
 
-  get amount() {
-    return this._amount;
+  get count() {
+    return this._count;
   }
 
   @Output()
-  amountChange = new EventEmitter<[Recipe, number]>();
+  countChange = new EventEmitter<number>();
 
   ngOnInit(): void {
   }
 
   onMinusClick(): void {
-    this.amount = Math.max(this.amount - 1, 0);
-    this.amountChange.emit([this.recipe, this.amount]);
+    this.count = Math.max(this.count - 1, 0);
+    this.countChange.emit(this.count);
   }
 
   onPlusClick(): void {
-    this.amount++;
-    this.amountChange.emit([this.recipe, this.amount]);
+    this.count++;
+    this.countChange.emit(this.count);
   }
 }

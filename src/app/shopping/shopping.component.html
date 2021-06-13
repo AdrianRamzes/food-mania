@@ -6,7 +6,7 @@
         <button mat-flat-button (click)="onAddRecipeClick(recipe.id)">
             <mat-icon mat-list-icon>add</mat-icon>
         </button>
-        <span>{{recipiesAmounts[recipe.id]}}</span>
+        <span>{{getRecipeCount(recipe.id)}}</span>
         <button mat-flat-button (click)="onRemoveRecipeClick(recipe.id)">
             <mat-icon mat-list-icon>remove</mat-icon>
         </button>

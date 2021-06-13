@@ -1,72 +1,34 @@
-import { EventEmitter, Output } from '@angular/core';
-import { Component, Input, OnInit } from '@angular/core';
-import { recipes } from 'src/app/data/recipies.data';
-import { products } from 'src/app/data/products.data';
-import { Product } from 'src/app/models/product.model';
+import { Component } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
+import { DataService } from '../data/data.service';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-shopping',
   templateUrl: './shopping.component.html',
   styleUrls: ['./shopping.component.scss']
 })
-export class ShoppingComponent implements OnInit {
-
-  @Input()
-  recipies: Recipe[];
-
-  @Input()
-  recipiesAmounts: number[];
-
-  @Output()
-  addRecipe = new EventEmitter<number>();
-
-  @Output()
-  removeRecipe = new EventEmitter<number>();
+export class ShoppingComponent {
 
   get selectedRecipies(): Recipe[] {
-    return recipes.filter((r) => this.recipiesAmounts[r.id] > 0);
+    return this.dataService.getSelectedRecipies();
   }
 
-  _products: [Product, number][] = [];
-  get productsList() {
-    return this._products;
+  get productsList(): [Product, number][] {
+    return this.dataService.shoppingList;
   }
 
-  _allProducts = new Map<number, Product>()
-  constructor() {
-    products.forEach(p => {
-      this._allProducts.set(p.id, p);
-    });
+  getRecipeCount(recipeId: number) {
+    return this.dataService.getCount(recipeId);
   }
 
-  ngOnInit(): void {
-    this.updateProducts();
-  }
+  constructor(private dataService: DataService) { }
 
   onAddRecipeClick(recipeId: number) {
-    this.addRecipe.emit(recipeId);
-    this.updateProducts();
+    this.dataService.addRecipeToList(recipeId);
   }
 
   onRemoveRecipeClick(recipeId: number) {
-    this.removeRecipe.emit(recipeId);
-    this.updateProducts();
-  }
-
-  private updateProducts() {
-    const tmpProducts = new Map<Product, number>();
-    this.selectedRecipies.forEach((recipe) => {
-      const count = this.recipiesAmounts[recipe.id];
-      recipe.products.forEach(entry => {
-        const prod = this._allProducts.get(entry[0]);
-        const amount = entry[1] * count;
-        const currentAmount = tmpProducts.has(prod)
-          ? tmpProducts.get(prod)
-          : 0;
-        tmpProducts.set(prod, currentAmount + amount);
-      });
-    });
-    this._products = Array.from(tmpProducts.entries());
+    this.dataService.removeRecipeFromList(recipeId);
   }
 }

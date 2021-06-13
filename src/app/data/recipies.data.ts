@@ -6,7 +6,7 @@ export const recipes = [
         title: 'Simple Brownie',
         description: 'description',
         imageUrl: 'https://images.unsplash.com/photo-1605190557072-1fe6a230ee65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib',
-        products: [
+        ingredients: [
             [0, 250],   // dark chocolate: 250g
             [1, 200],   // butter: 200g
             [2, 3],     // eggs: 3

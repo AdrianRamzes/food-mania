@@ -1,40 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Recipe } from './models/recipe.model';
-
-import { recipes } from "src/app/data/recipies.data";
-import * as _ from 'lodash';
+import { Component } from '@angular/core';
+import { DataService } from './data/data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-
-  public get recipes(): Recipe[] {
-    return recipes;
-  };
-
-  recipiesSum = 0;
-  recipiesAmounts: number[] = [];
-
-  private readonly storageKey = 'recipiesAmounts';
+export class AppComponent {
 
   currentView = View.recipies;
-  showRecipies = true;
-  showShoppingList = false;
 
-  ngOnInit() {
-    const jsonStr = localStorage.getItem(this.storageKey);
-    if (jsonStr) {
-      this.recipiesAmounts = JSON.parse(jsonStr);
-    } else {
-      recipes.forEach(r => {
-        this.recipiesAmounts.push(0);
-      });
-    }
-    this.updateRecipiesAmount();
+  get recipiesSum() {
+    return this.dataService.getTotalCount();
   }
+
+  constructor(private dataService: DataService) { }
 
   onCartClick() {
     this.currentView = View.shoppingList;
@@ -42,26 +22,6 @@ export class AppComponent implements OnInit {
 
   onMealClick() {
     this.currentView = View.recipies;
-  }
-
-  onRecipiesAmountsChanged(event: number[]) {
-    this.updateRecipiesAmount();
-  }
-
-  onAddRecipeClick(recipeId: number) {
-    this.recipiesAmounts[recipeId]++;
-    this.updateRecipiesAmount();
-  }
-
-  onRemoveRecipeClick(recipeId: number) {
-    this.recipiesAmounts[recipeId] = Math.max(this.recipiesAmounts[recipeId] - 1, 0);
-    this.updateRecipiesAmount();
-  }
-
-
-  private updateRecipiesAmount() {
-    this.recipiesSum = _.sum(this.recipiesAmounts);
-    localStorage.setItem(this.storageKey, JSON.stringify(this.recipiesAmounts));
   }
 }
 

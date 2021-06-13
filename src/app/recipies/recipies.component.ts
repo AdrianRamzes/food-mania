@@ -1,29 +1,25 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
+import { DataService } from '../data/data.service';
 
 @Component({
   selector: 'app-recipies',
   templateUrl: './recipies.component.html',
   styleUrls: ['./recipies.component.scss']
 })
-export class RecipiesComponent implements OnInit {
+export class RecipiesComponent {
 
-  @Input()
-  recipies: Recipe[];
-
-  @Input()
-  recipiesAmounts: number[];
-
-  @Output()
-  recipiesAmountsChanged = new EventEmitter<number[]>();
-
-  constructor() { }
-
-  ngOnInit(): void {
+  get recipies() {
+    return this.dataService.getAllRecipies();
   }
 
-  onRecipeAmountChanged(event: [Recipe, number]) {
-    this.recipiesAmounts[event[0].id] = Math.max(event[1], 0);
-    this.recipiesAmountsChanged.emit(this.recipiesAmounts);
+  getRecipeCount(recipeId: number): number {
+    return this.dataService.getCount(recipeId);
+  }
+
+  constructor(private dataService: DataService) { }
+
+  onCountChanged(recipeId: number, count: number) {
+    this.dataService.setCount(recipeId, count);
   }
 }

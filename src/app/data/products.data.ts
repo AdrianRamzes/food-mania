@@ -14,7 +14,7 @@ export const products = [
     {
         id: 2,
         name: 'Eggs',
-        unit: Units.noUnit,
+        unit: Units.piece,
     } as Product,
     {
         id: 3,
@@ -29,6 +29,6 @@ export const products = [
     {
         id: 5,
         name: 'Salt',
-        unit: Units.g,
+        unit: Units.spice,
     } as Product,
 ];

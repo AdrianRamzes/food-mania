@@ -5,7 +5,8 @@ export class Product {
 };
 
 export enum Units {
-    noUnit,
+    piece,
+    spice,
     g,
     kg,
     l,

@@ -4,6 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataService } from "src/app/data/data.service";
 import { FormsModule } from '@angular/forms';
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatButtonModule } from "@angular/material/button";
@@ -40,7 +41,7 @@ import { ShoppingComponent } from './shopping/shopping.component';
     MatToolbarModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
