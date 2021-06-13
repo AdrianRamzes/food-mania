@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
 
   private readonly storageKey = 'recipiesAmounts';
 
+  showRecipies = true;
+  showShoppingList = false;
+
   ngOnInit() {
     const jsonStr = localStorage.getItem(this.storageKey);
     if (jsonStr) {
@@ -33,7 +36,8 @@ export class AppComponent implements OnInit {
   }
 
   onCartClick() {
-
+    this.showRecipies = !this.showRecipies;
+    this.showShoppingList = !this.showShoppingList;
   }
 
   onRecipiesAmountsChanged(event: number[]) {

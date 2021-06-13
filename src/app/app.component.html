@@ -1,8 +1,17 @@
-<button class="floating-button" mat-fab color="primary" (click)="onCartClick()">
-  <mat-icon [matBadge]="recipiesSum" matBadgeColor="warn">shopping_basket
-  </mat-icon>
-</button>
-<app-recipies-list [recipies]="recipes"
-  [recipiesAmounts]="recipiesAmounts"
-  (recipiesAmountsChanged)="onRecipiesAmountsChanged($event)">
-</app-recipies-list>
+<mat-toolbar class="floating-toolbar">
+  <span>Select meals</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button (click)="onCartClick()">
+    <mat-icon [matBadge]="recipiesSum" matBadgeColor="warn">shopping_cart
+    </mat-icon>
+  </button>
+</mat-toolbar>
+<div class="main-view">
+  <app-recipies-list *ngIf="showRecipies" [recipies]="recipes"
+    [recipiesAmounts]="recipiesAmounts"
+    (recipiesAmountsChanged)="onRecipiesAmountsChanged($event)">
+  </app-recipies-list>
+  <app-shopping-list *ngIf="showShoppingList" [recipies]="recipes"
+    [recipiesAmounts]="recipiesAmounts">
+  </app-shopping-list>
+  </div>

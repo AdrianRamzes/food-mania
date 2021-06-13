@@ -11,8 +11,15 @@ export class RecipeCardComponent implements OnInit {
   @Input()
   recipe: Recipe;
 
+  private _amount: number = 0;
   @Input()
-  amount: number = 0;
+  set amount(value: number) {
+    this._amount = value ?? 0;
+  };
+
+  get amount() {
+    return this._amount;
+  }
 
   @Output()
   amountChanged = new EventEmitter<[Recipe, number]>();
