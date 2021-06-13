@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
         this.recipiesAmounts.push(0);
       });
     }
-    this.recipiesSum = _.sum(this.recipiesAmounts);
+    this.updateRecipiesAmount();
   }
 
   onCartClick() {
@@ -45,18 +45,24 @@ export class AppComponent implements OnInit {
   }
 
   onRecipiesAmountsChanged(event: number[]) {
-    this.recipiesSum = _.sum(event);
-    localStorage.setItem(this.storageKey, JSON.stringify(event));
+    this.updateRecipiesAmount();
   }
 
   onAddRecipeClick(recipeId: number) {
     this.recipiesAmounts[recipeId]++;
+    this.updateRecipiesAmount();
   }
 
   onRemoveRecipeClick(recipeId: number) {
     this.recipiesAmounts[recipeId] = Math.max(this.recipiesAmounts[recipeId] - 1, 0);
+    this.updateRecipiesAmount();
   }
 
+
+  private updateRecipiesAmount() {
+    this.recipiesSum = _.sum(this.recipiesAmounts);
+    localStorage.setItem(this.storageKey, JSON.stringify(this.recipiesAmounts));
+  }
 }
 
 enum View {
