@@ -1,17 +1,25 @@
 <mat-toolbar class="floating-toolbar">
-  <span>Select meals</span>
+  <span *ngIf="currentView == 'recipies'">Select meals</span>
+  <span *ngIf="currentView == 'shopping-list'">Shopping list</span>
   <span class="toolbar-spacer"></span>
-  <button mat-icon-button (click)="onCartClick()">
+  <button *ngIf="currentView == 'recipies'" mat-icon-button
+    (click)="onCartClick()">
     <mat-icon [matBadge]="recipiesSum" matBadgeColor="warn">shopping_cart
     </mat-icon>
   </button>
+  <button *ngIf="currentView == 'shopping-list'" mat-icon-button
+    (click)="onMealClick()">
+    <mat-icon>restaurant</mat-icon>
+  </button>
 </mat-toolbar>
 <div class="main-view">
-  <app-recipies-list *ngIf="showRecipies" [recipies]="recipes"
+  <app-recipies-list *ngIf="currentView == 'recipies'" [recipies]="recipes"
     [recipiesAmounts]="recipiesAmounts"
     (recipiesAmountsChanged)="onRecipiesAmountsChanged($event)">
   </app-recipies-list>
-  <app-shopping-list *ngIf="showShoppingList" [recipies]="recipes"
+  <app-shopping-list *ngIf="currentView == 'shopping-list'" [recipies]="recipes"
+    (addRecipe)="onAddRecipeClick($event)"
+    (removeRecipe)="onRemoveRecipeClick($event)"
     [recipiesAmounts]="recipiesAmounts">
   </app-shopping-list>
   </div>

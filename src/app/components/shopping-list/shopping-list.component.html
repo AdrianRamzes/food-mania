@@ -1,3 +1,16 @@
-<p *ngFor="let recipe of recipies">
-    {{recipe.title}}: {{recipiesAmounts[recipe.id]}}
-</p>
+<mat-list>
+    <div mat-subheader>Meals</div>
+    <mat-list-item *ngFor="let recipe of selectedRecipies">
+        <mat-icon mat-list-icon>restaurant</mat-icon>
+        <div>{{recipe.title}}</div>
+        <button mat-flat-button (click)="onAddRecipeClick(recipe.id)">
+            <mat-icon mat-list-icon>add</mat-icon>
+        </button>
+        <span>{{recipiesAmounts[recipe.id]}}</span>
+        <button mat-flat-button (click)="onRemoveRecipeClick(recipe.id)">
+            <mat-icon mat-list-icon>remove</mat-icon>
+        </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Products</div>
+</mat-list>

@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
 
   private readonly storageKey = 'recipiesAmounts';
 
+  currentView = View.recipies;
   showRecipies = true;
   showShoppingList = false;
 
@@ -36,12 +37,29 @@ export class AppComponent implements OnInit {
   }
 
   onCartClick() {
-    this.showRecipies = !this.showRecipies;
-    this.showShoppingList = !this.showShoppingList;
+    this.currentView = View.shoppingList;
+  }
+
+  onMealClick() {
+    this.currentView = View.recipies;
   }
 
   onRecipiesAmountsChanged(event: number[]) {
     this.recipiesSum = _.sum(event);
     localStorage.setItem(this.storageKey, JSON.stringify(event));
   }
+
+  onAddRecipeClick(recipeId: number) {
+    this.recipiesAmounts[recipeId]++;
+  }
+
+  onRemoveRecipeClick(recipeId: number) {
+    this.recipiesAmounts[recipeId] = Math.max(this.recipiesAmounts[recipeId] - 1, 0);
+  }
+
+}
+
+enum View {
+  recipies = 'recipies',
+  shoppingList = 'shopping-list',
 }
