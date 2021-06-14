@@ -1,5 +1,5 @@
 export class Product {
-    public readonly id: number;
+    public readonly index: number;
     public readonly name: string;
     public readonly unit: Units;
 };

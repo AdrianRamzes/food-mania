@@ -2,7 +2,7 @@ import { Recipe } from '../models/recipe.model';
 
 export const recipes = [
     {
-        id: 0,
+        index: 0,
         title: 'Simple Brownie',
         description: 'description',
         imageUrl: 'https://images.unsplash.com/photo-1605190557072-1fe6a230ee65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib',

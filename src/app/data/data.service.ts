@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 import { Recipe } from '../models/recipe.model';
 import { Product } from '../models/product.model';
@@ -15,8 +15,8 @@ export class DataService {
 
     private readonly storageKey = 'recipiesCounts';
 
-    private _recipiesMap = new Map<number, Recipe>();
-    private _productsMap = new Map<number, Product>();
+    private _recipiesById = new Map<number, Recipe>();
+    private _productsById = new Map<number, Product>();
 
     private _counts: number[] = [];
 
@@ -30,10 +30,10 @@ export class DataService {
             });
         }
         recipes.forEach(r => {
-            this._recipiesMap.set(r.id, r);
+            this._recipiesById.set(r.index, r);
         });
         products.forEach(p => {
-            this._productsMap.set(p.id, p);
+            this._productsById.set(p.index, p);
         });
         this.update();
     }
@@ -56,10 +56,11 @@ export class DataService {
         this.update();
     }
 
-    public removeRecipeFromList(recipeId: number) {
-        if (this._counts[recipeId] == 0) return;
-        this._counts[recipeId]--;
-        this.update();
+    public removeRecipeFromList(recipeId: number): void {
+        if (this._counts[recipeId] > 0) {
+            this._counts[recipeId]--;
+            this.update();
+        }
     }
 
     public getAllRecipies(): Recipe[] {
@@ -71,11 +72,11 @@ export class DataService {
     }
 
     public getRecipe(id: number): Recipe {
-        return this._recipiesMap.get(id) ?? null;
+        return this._recipiesById.get(id) ?? null;
     }
 
     public getProduct(id: number): Product {
-        return this._productsMap.get(id) ?? null;
+        return this._productsById.get(id) ?? null;
     }
 
     public getProductsForRecipe(recipeId: number): Product[] {
@@ -84,12 +85,12 @@ export class DataService {
     }
 
     private update(): void {
-        let productsMap = new Map<number, number>();
+        const productsMap = new Map<number, number>();
         this._counts.forEach((count, id) => {
             this.getRecipe(id).ingredients.forEach(ingredient => {
-                let prodId = ingredient[0];
-                let amount = ingredient[1] * count;
-                let currentAmount = productsMap.get(prodId) ?? 0;
+                const prodId = ingredient[0];
+                const amount = ingredient[1] * count;
+                const currentAmount = productsMap.get(prodId) ?? 0;
                 productsMap.set(prodId, currentAmount + amount);
             });
         });
