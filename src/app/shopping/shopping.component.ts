@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
-import { DataService } from '../data/data.service';
+import { DataService, ProductsListItem } from '../data/data.service';
 import { Product } from '../models/product.model';
 
 @Component({
@@ -14,8 +14,8 @@ export class ShoppingComponent {
     return this.dataService.getAllRecipies().filter((r) => this.dataService.getCount(r.index) > 0);
   }
 
-  get productsList(): [Product, number][] {
-    return this.dataService.shoppingList.filter(x => x[1] > 0);
+  get productsList(): ProductsListItem[] {
+    return this.dataService.productsList.filter(p => p.amount > 0);
   }
 
   getRecipeCount(recipeId: number): number {
