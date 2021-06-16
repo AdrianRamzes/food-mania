@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Recipe } from 'src/app/models/recipe.model';
-import { DataService } from '../data/data.service';
+import { DataService, RecipiesListItem } from '../data/data.service';
 
 @Component({
   selector: 'app-recipies',
@@ -9,12 +8,8 @@ import { DataService } from '../data/data.service';
 })
 export class RecipiesComponent {
 
-  get recipies(): Recipe[] {
-    return this.dataService.getAllRecipies();
-  }
-
-  getRecipeCount(recipeId: number): number {
-    return this.dataService.getCount(recipeId);
+  get recipiesList(): RecipiesListItem[] {
+    return this.dataService.recipiesList;
   }
 
   constructor(private dataService: DataService) { }

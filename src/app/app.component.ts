@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as _ from 'lodash';
 import { DataService } from './data/data.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class AppComponent {
   currentView = View.recipies;
 
   get recipiesSum(): number {
-    return this.dataService.getTotalCount();
+    return _.sumBy(this.dataService.recipiesList, 'count');
   }
 
   constructor(private dataService: DataService) { }

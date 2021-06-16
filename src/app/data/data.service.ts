@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 export class DataService {
 
     public productsList: ProductsListItem[] = [];
-    // public recipiesList: RecipiesListItem[] = [];
+    public recipiesList: RecipiesListItem[] = [];
 
     private readonly recipiesCountsStorageKey = 'recipiesCounts';
 
@@ -69,8 +69,8 @@ export class DataService {
         });
         this.productsList = _.zip(products, this.productsCounts)
             .map(pc => ({ product: pc[0], amount: pc[1] } as ProductsListItem));
-        // this.recipiesList = _.zip(recipies, this.recipiesCounts)
-        //     .map(rc => ({ recipe: rc[0], count: rc[1] } as RecipiesListItem));
+        this.recipiesList = _.zip(recipies, this.recipiesCounts)
+            .map(rc => ({ recipe: rc[0], count: rc[1] } as RecipiesListItem));
 
         localStorage.setItem(this.recipiesCountsStorageKey, JSON.stringify(this.recipiesCounts));
     }
