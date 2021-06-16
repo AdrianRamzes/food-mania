@@ -1,6 +1,6 @@
 import { Recipe } from '../models/recipe.model';
 
-export const recipes = [
+export const recipies = [
     {
         index: 0,
         title: 'Simple Brownie',

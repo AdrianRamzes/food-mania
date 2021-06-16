@@ -1,4 +1,4 @@
 <app-recipe-card *ngFor="let recipe of recipies" [recipe]="recipe"
-    [count]="getRecipeCount(recipe.id)"
-    (countChange)="onCountChanged(recipe.id, $event)">
+    [count]="getRecipeCount(recipe.index)"
+    (countChange)="onCountChanged(recipe.index, $event)">
 </app-recipe-card>

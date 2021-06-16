@@ -10,17 +10,17 @@ export class AppComponent {
 
   currentView = View.recipies;
 
-  get recipiesSum() {
+  get recipiesSum(): number {
     return this.dataService.getTotalCount();
   }
 
   constructor(private dataService: DataService) { }
 
-  onCartClick() {
+  onCartClick(): void {
     this.currentView = View.shoppingList;
   }
 
-  onMealClick() {
+  onMealClick(): void {
     this.currentView = View.recipies;
   }
 }

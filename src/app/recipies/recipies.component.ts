@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import { DataService } from '../data/data.service';
 
@@ -9,7 +9,7 @@ import { DataService } from '../data/data.service';
 })
 export class RecipiesComponent {
 
-  get recipies() {
+  get recipies(): Recipe[] {
     return this.dataService.getAllRecipies();
   }
 
@@ -19,7 +19,7 @@ export class RecipiesComponent {
 
   constructor(private dataService: DataService) { }
 
-  onCountChanged(recipeId: number, count: number) {
+  onCountChanged(recipeId: number, count: number): void {
     this.dataService.setCount(recipeId, count);
   }
 }

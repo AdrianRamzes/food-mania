@@ -3,12 +3,12 @@
     <mat-list-item *ngFor="let recipe of selectedRecipies">
         <mat-icon mat-list-icon>restaurant</mat-icon>
         <div>{{recipe.title}}</div>
-        <button mat-flat-button (click)="onAddRecipeClick(recipe.id)">
-            <mat-icon mat-list-icon>add</mat-icon>
-        </button>
-        <span>{{getRecipeCount(recipe.id)}}</span>
-        <button mat-flat-button (click)="onRemoveRecipeClick(recipe.id)">
+        <button mat-flat-button (click)="onRemoveRecipeClick(recipe.index)">
             <mat-icon mat-list-icon>remove</mat-icon>
+        </button>
+        <span>{{getRecipeCount(recipe.index)}}</span>
+        <button mat-flat-button (click)="onAddRecipeClick(recipe.index)">
+            <mat-icon mat-list-icon>add</mat-icon>
         </button>
     </mat-list-item>
     <mat-divider></mat-divider>

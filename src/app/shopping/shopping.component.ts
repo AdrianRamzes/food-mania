@@ -11,24 +11,24 @@ import { Product } from '../models/product.model';
 export class ShoppingComponent {
 
   get selectedRecipies(): Recipe[] {
-    return this.dataService.getSelectedRecipies();
+    return this.dataService.getAllRecipies().filter((r) => this.dataService.getCount(r.index) > 0);
   }
 
   get productsList(): [Product, number][] {
-    return this.dataService.shoppingList;
+    return this.dataService.shoppingList.filter(x => x[1] > 0);
   }
 
-  getRecipeCount(recipeId: number) {
+  getRecipeCount(recipeId: number): number {
     return this.dataService.getCount(recipeId);
   }
 
   constructor(private dataService: DataService) { }
 
-  onAddRecipeClick(recipeId: number) {
+  onAddRecipeClick(recipeId: number): void {
     this.dataService.addRecipeToList(recipeId);
   }
 
-  onRemoveRecipeClick(recipeId: number) {
+  onRemoveRecipeClick(recipeId: number): void {
     this.dataService.removeRecipeFromList(recipeId);
   }
 }
