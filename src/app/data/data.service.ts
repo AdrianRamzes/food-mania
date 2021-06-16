@@ -15,6 +15,7 @@ export class DataService {
     public recipiesList: RecipiesListItem[] = [];
 
     private readonly recipiesCountsStorageKey = 'recipiesCounts';
+    private readonly checkedProductsStorageKey = 'checkedProducts';
 
     private recipiesCounts: number[] = [];
     private productsCounts: number[] = [];
@@ -22,22 +23,32 @@ export class DataService {
 
     constructor() {
         this.loadRecipiesCountsFromLocalStorage();
+        this.loadCheckedProductsFromLocalStorage();
         this.update();
     }
 
     public setCount(recipeId: number, count: number): void {
         this.recipiesCounts[recipeId] = count;
+        this.recipiesList[recipeId].recipe.ingredients.forEach(i => {
+            this.checkedProducts.delete(i.productId);
+        });
         this.update();
     }
 
     public addRecipeToList(recipeId: number): void {
         this.recipiesCounts[recipeId]++;
+        this.recipiesList[recipeId].recipe.ingredients.forEach(i => {
+            this.checkedProducts.delete(i.productId);
+        });
         this.update();
     }
 
     public removeRecipeFromList(recipeId: number): void {
         if (this.recipiesCounts[recipeId] > 0) {
             this.recipiesCounts[recipeId]--;
+            this.recipiesList[recipeId].recipe.ingredients.forEach(i => {
+                this.checkedProducts.delete(i.productId);
+            });
             this.update();
         }
     }
@@ -52,6 +63,7 @@ export class DataService {
             amount: this.productsList[productId].amount,
             checked: true,
         };
+        localStorage.setItem(this.checkedProductsStorageKey, JSON.stringify(Array.from(this.checkedProducts.values())));
     }
 
     public uncheckProduct(productId: number): void {
@@ -64,6 +76,7 @@ export class DataService {
             amount: this.productsList[productId].amount,
             checked: false,
         };
+        localStorage.setItem(this.checkedProductsStorageKey, JSON.stringify(Array.from(this.checkedProducts.values())));
     }
 
     private update(): void {
@@ -78,7 +91,7 @@ export class DataService {
             });
         });
         this.productsList = _.zip(products, this.productsCounts)
-            .map(pc => ({ product: pc[0], amount: pc[1], checked: false } as ProductsListItem));
+            .map(pc => ({ product: pc[0], amount: pc[1], checked: this.checkedProducts.has(pc[0].index) } as ProductsListItem));
         this.recipiesList = _.zip(recipies, this.recipiesCounts)
             .map(rc => ({ recipe: rc[0], count: rc[1] } as RecipiesListItem));
 
@@ -90,6 +103,13 @@ export class DataService {
         if (jsonStr) {
             // it's ok to have a shorter array then the list of recipies
             this.recipiesCounts = JSON.parse(jsonStr) as number[];
+        }
+    }
+    private loadCheckedProductsFromLocalStorage(): void {
+        const jsonStr = localStorage.getItem(this.checkedProductsStorageKey);
+        if (jsonStr) {
+            const checkedIndexes = JSON.parse(jsonStr) as number[];
+            checkedIndexes.forEach(i => this.checkedProducts.add(i));
         }
     }
 }
