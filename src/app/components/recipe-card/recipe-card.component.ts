@@ -15,9 +15,9 @@ export class RecipeCardComponent implements OnInit {
   @Input()
   set count(value: number) {
     this._count = value ?? 0;
-  };
+  }
 
-  get count() {
+  get count(): number {
     return this._count;
   }
 

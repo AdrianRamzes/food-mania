@@ -12,30 +12,22 @@ import * as _ from 'lodash';
 export class DataService {
 
     public productsList: ProductsListItem[] = [];
-    public recipiesList: RecipiesListItem[] = [];
+    // public recipiesList: RecipiesListItem[] = [];
 
-    private readonly storageKey = 'recipiesCounts';
+    private readonly recipiesCountsStorageKey = 'recipiesCounts';
 
     private recipiesCounts: number[] = [];
     private productsCounts: number[] = [];
 
     constructor() {
-        const jsonStr = localStorage.getItem(this.storageKey);
-        if (jsonStr) {
-            const loaded = JSON.parse(jsonStr) as number[];
-            if (loaded.length === recipies.length) {
-                this.recipiesCounts = loaded;
-            }
-        }
-        if (this.recipiesCounts.length === 0) {
-            recipies.forEach(r => {
-                this.recipiesCounts.push(0);
-            });
-        }
+        this.loadRecipiesCountsFromLocalStorage();
         this.update();
     }
 
     public getCount(recipeId: number): number {
+        if (recipeId < 0 || recipeId >= recipies.length) {
+            return 0;
+        }
         return this.recipiesCounts[recipeId];
     }
 
@@ -65,17 +57,30 @@ export class DataService {
     }
 
     private update(): void {
-        const productsMap = new Map<number, number>();
-        this.recipiesCounts.forEach((count, index) => {
-            recipies[index].ingredients.forEach(ingredient => {
-                const prodId = ingredient[0];
-                const amount = ingredient[1] * count;
-                const currentAmount = productsMap.get(prodId) ?? 0;
-                productsMap.set(prodId, currentAmount + amount);
+        this.productsCounts = [];
+        products.forEach(p => {
+            this.productsCounts.push(0);
+        });
+        recipies.forEach(recipe => {
+            recipe.ingredients.forEach(ingredient => {
+                this.productsCounts[ingredient.productId]
+                    += ingredient.amount * this.recipiesCounts[recipe.index];
             });
         });
-        this.productsList = Array.from(productsMap.entries()).map(x => ({ product: products[x[0]], amount: x[1] } as ProductsListItem));
-        localStorage.setItem(this.storageKey, JSON.stringify(this.recipiesCounts));
+        this.productsList = _.zip(products, this.productsCounts)
+            .map(pc => ({ product: pc[0], amount: pc[1] } as ProductsListItem));
+        // this.recipiesList = _.zip(recipies, this.recipiesCounts)
+        //     .map(rc => ({ recipe: rc[0], count: rc[1] } as RecipiesListItem));
+
+        localStorage.setItem(this.recipiesCountsStorageKey, JSON.stringify(this.recipiesCounts));
+    }
+
+    private loadRecipiesCountsFromLocalStorage(): void {
+        const jsonStr = localStorage.getItem(this.recipiesCountsStorageKey);
+        if (jsonStr) {
+            // it's ok to have a shorter array then the list of recipies
+            this.recipiesCounts = JSON.parse(jsonStr) as number[];
+        }
     }
 }
 
