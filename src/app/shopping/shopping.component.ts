@@ -25,4 +25,12 @@ export class ShoppingComponent {
   onRemoveRecipeClick(recipeId: number): void {
     this.dataService.removeRecipeFromList(recipeId);
   }
+
+  onProductChecked(p: ProductsListItem, event): void {
+    if (event.checked) {
+      this.dataService.checkProduct(p.product.index);
+    } else {
+      this.dataService.uncheckProduct(p.product.index);
+    }
+  }
 }

@@ -13,8 +13,11 @@
     </mat-list-item>
     <mat-divider></mat-divider>
     <div mat-subheader>Products</div>
-    <mat-list-item *ngFor="let p of productsList">
+    <mat-list-item *ngFor="let p of productsList" class="product-list-item"
+        [ngClass]="{'checked': p.checked}">
         <div mat-line>{{p.product.name}}</div>
+        <mat-checkbox [ngModel]="p.checked" (change)="onProductChecked(p, $event)">
+        </mat-checkbox>
         <div *ngIf="p.amount > 0" mat-line>{{p.amount}}</div>
     </mat-list-item>
 </mat-list>

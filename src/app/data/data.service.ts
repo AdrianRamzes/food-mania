@@ -18,6 +18,7 @@ export class DataService {
 
     private recipiesCounts: number[] = [];
     private productsCounts: number[] = [];
+    private checkedProducts: Set<number> = new Set();
 
     constructor() {
         this.loadRecipiesCountsFromLocalStorage();
@@ -41,6 +42,30 @@ export class DataService {
         }
     }
 
+    public checkProduct(productId: number): void {
+        if (this.productsList[productId].checked) {
+            return;
+        }
+        this.checkedProducts.add(productId);
+        this.productsList[productId] = {
+            product: this.productsList[productId].product,
+            amount: this.productsList[productId].amount,
+            checked: true,
+        };
+    }
+
+    public uncheckProduct(productId: number): void {
+        if (!this.productsList[productId].checked) {
+            return;
+        }
+        this.checkedProducts.delete(productId);
+        this.productsList[productId] = {
+            product: this.productsList[productId].product,
+            amount: this.productsList[productId].amount,
+            checked: false,
+        };
+    }
+
     private update(): void {
         this.productsCounts = [];
         products.forEach(p => {
@@ -53,7 +78,7 @@ export class DataService {
             });
         });
         this.productsList = _.zip(products, this.productsCounts)
-            .map(pc => ({ product: pc[0], amount: pc[1] } as ProductsListItem));
+            .map(pc => ({ product: pc[0], amount: pc[1], checked: false } as ProductsListItem));
         this.recipiesList = _.zip(recipies, this.recipiesCounts)
             .map(rc => ({ recipe: rc[0], count: rc[1] } as RecipiesListItem));
 
@@ -72,6 +97,7 @@ export class DataService {
 export class ProductsListItem {
     public readonly product: Product;
     public readonly amount: number;
+    public readonly checked: boolean;
 }
 
 export class RecipiesListItem {
