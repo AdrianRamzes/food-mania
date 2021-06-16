@@ -24,17 +24,6 @@ export class DataService {
         this.update();
     }
 
-    public getCount(recipeId: number): number {
-        if (recipeId < 0 || recipeId >= recipies.length) {
-            return 0;
-        }
-        return this.recipiesCounts[recipeId];
-    }
-
-    public getTotalCount(): number {
-        return _.sum(this.recipiesCounts);
-    }
-
     public setCount(recipeId: number, count: number): void {
         this.recipiesCounts[recipeId] = count;
         this.update();
@@ -50,10 +39,6 @@ export class DataService {
             this.recipiesCounts[recipeId]--;
             this.update();
         }
-    }
-
-    public getAllRecipies(): Recipe[] {
-        return recipies;
     }
 
     private update(): void {

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Recipe } from 'src/app/models/recipe.model';
-import { DataService, ProductsListItem } from '../data/data.service';
-import { Product } from '../models/product.model';
+import { DataService, ProductsListItem, RecipiesListItem } from '../data/data.service';
 
 @Component({
   selector: 'app-shopping',
@@ -10,16 +8,12 @@ import { Product } from '../models/product.model';
 })
 export class ShoppingComponent {
 
-  get selectedRecipies(): Recipe[] {
-    return this.dataService.getAllRecipies().filter((r) => this.dataService.getCount(r.index) > 0);
+  get selectedRecipies(): RecipiesListItem[] {
+    return this.dataService.recipiesList.filter((r) => r.count > 0);
   }
 
   get productsList(): ProductsListItem[] {
     return this.dataService.productsList.filter(p => p.amount > 0);
-  }
-
-  getRecipeCount(recipeId: number): number {
-    return this.dataService.getCount(recipeId);
   }
 
   constructor(private dataService: DataService) { }
