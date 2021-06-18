@@ -95,7 +95,14 @@ export class DataService {
         this.recipiesList = _.zip(recipies, this.recipiesCounts)
             .map(rc => ({ recipe: rc[0], count: rc[1] } as RecipiesListItem));
 
+        this.productsList
+            .filter(p => p.checked && p.amount === 0)
+            .forEach(p => {
+                this.checkedProducts.delete(p.product.index);
+            });
+
         localStorage.setItem(this.recipiesCountsStorageKey, JSON.stringify(this.recipiesCounts));
+        localStorage.setItem(this.checkedProductsStorageKey, JSON.stringify(Array.from(this.checkedProducts.values())));
     }
 
     private loadRecipiesCountsFromLocalStorage(): void {

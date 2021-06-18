@@ -9,4 +9,5 @@ export class Recipe {
 export class Ingredient {
     public readonly productId: number;
     public readonly amount: number;
+    public readonly optional: boolean;
 }
