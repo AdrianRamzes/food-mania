@@ -43,4 +43,20 @@ export const recipies = [
             { productId: 18, amount: 100 }, // Rice: 100g
         ]
     } as Recipe,
+    {
+        index: 3,
+        title: 'American Pancakes',
+        description: 'description',
+        imageUrl: 'assets/images/main_img_3.jpeg',
+        ingredients: [
+            { productId: 2, amount: 1 },       // Eggs: 1
+            { productId: 4, amount: 300 },     // Flour: 300g
+            { productId: 20, amount: 300 },    // Buttermilk: 300ml
+            { productId: 24, amount: 300 },    // Powdered Sugar: 5g
+            { productId: 21, amount: 3 },      // Baking Powder: 3g
+            { productId: 23, amount: 2.5 },    // Baking Soda: 2.5g
+            { productId: 5, amount: 1 },       // Salt
+            { productId: 22, amount: 30 },     // Oil
+        ]
+    } as Recipe,
 ];
