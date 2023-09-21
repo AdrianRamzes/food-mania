@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
-import { DataService, ProductsListItem, RecipiesListItem } from '../data/data.service';
+import {
+  DataService,
+  ProductsListItem,
+  RecipesListItem,
+} from '../data/data.service';
 
 @Component({
-  selector: 'app-shopping',
+  selector: 'shopping',
   templateUrl: './shopping.component.html',
-  styleUrls: ['./shopping.component.scss']
+  styleUrls: ['./shopping.component.css'],
 })
 export class ShoppingComponent {
-
-  get selectedRecipies(): RecipiesListItem[] {
-    return this.dataService.recipiesList.filter((r) => r.count > 0);
+  get selectedRecipes(): RecipesListItem[] {
+    return this.dataService.recipesList.filter((r) => r.count > 0);
   }
 
   get productsList(): ProductsListItem[] {
-    return this.dataService.productsList.filter(p => p.amount > 0);
+    return this.dataService.productsList.filter((p) => p.amount > 0);
   }
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   onAddRecipeClick(recipeId: number): void {
     this.dataService.addRecipeToList(recipeId);
@@ -26,7 +29,7 @@ export class ShoppingComponent {
     this.dataService.removeRecipeFromList(recipeId);
   }
 
-  onProductChecked(p: ProductsListItem, event): void {
+  onProductChecked(p: ProductsListItem, event: any): void {
     if (event.checked) {
       this.dataService.checkProduct(p.product.index);
     } else {

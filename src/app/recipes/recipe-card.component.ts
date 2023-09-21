@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Recipe } from 'src/app/models/recipe.model';
+import { Recipe } from '../models/recipe.model';
 
 @Component({
-  selector: 'app-recipe-card',
+  selector: 'recipe-card',
   templateUrl: './recipe-card.component.html',
-  styleUrls: ['./recipe-card.component.scss'],
+  styleUrls: ['./recipe-card.component.css'],
 })
 export class RecipeCardComponent implements OnInit {
-
   @Input()
   recipe: Recipe;
 
@@ -24,8 +23,7 @@ export class RecipeCardComponent implements OnInit {
   @Output()
   countChange = new EventEmitter<number>();
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onMinusClick(): void {
     this.count = Math.max(this.count - 1, 0);
