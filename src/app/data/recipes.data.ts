@@ -4,9 +4,69 @@ import { Products } from '../data/products.data';
 export class Recipes {
   public static readonly all = [
     new Recipe(
+      'Chicken Souflaki',
+      'description',
+      'assets/images/Chicken_Souflaki.jpeg',
+      [
+        new Ingredient(Products.getByName('Chicken Breast'), 300),
+        new Ingredient(Products.getByName('Lemon'), 1),
+        new Ingredient(Products.getByName('Garlic'), 1),
+        new Ingredient(Products.getByName('Cucumber'), 1),
+        new Ingredient(Products.getByName('Rice'), 150),
+        new Ingredient(Products.getByName('Tomato'), 150),
+        new Ingredient(Products.getByName('Greek Yogurt'), 100),
+        new Ingredient(Products.getByName('Olive Oil'), 50),
+        new Ingredient(Products.getByName('Onion'), 1),
+      ]
+    ),
+    new Recipe(
+      'Coconut Soup with Beans',
+      'description',
+      'assets/images/Coconut_Soup_with_Beans.jpeg',
+      [
+        new Ingredient(Products.getByName('Yellow Paprika'), 1),
+        new Ingredient(Products.getByName('Garlic'), 1),
+        new Ingredient(Products.getByName('Lime'), 1),
+        new Ingredient(Products.getByName('Tomato Pulp (canned)'), 1),
+        new Ingredient(Products.getByName('Tortillas'), 2),
+        new Ingredient(Products.getByName('Coconut Milk'), 100),
+        new Ingredient(Products.getByName('Red Bean (canned)'), 100),
+        new Ingredient(Products.getByName('Onion'), 1),
+        new Ingredient(Products.getByName('Coconut Flakes'), 50),
+      ]
+    ),
+    new Recipe(
+      'Mexican Chicken With Salad',
+      'description',
+      'assets/images/Mexican_Chicken_with_Salad.jpeg',
+      [
+        new Ingredient(Products.getByName('Chicken Breast'), 300),
+        new Ingredient(Products.getByName('Salad'), 1),
+        new Ingredient(Products.getByName('Sweet Corn (canned)'), 150),
+        new Ingredient(Products.getByName('Lime'), 1),
+        new Ingredient(Products.getByName('Tortillas'), 1),
+        new Ingredient(Products.getByName('Onion'), 1),
+        new Ingredient(Products.getByName('Red Bean (canned)'), 150),
+      ]
+    ),
+    new Recipe(
+      'Gnocchi with Spinach',
+      'description',
+      'assets/images/Gnocchi_with_Spinach.jpeg',
+      [
+        new Ingredient(Products.getByName('Pine Nuts'), 50),
+        new Ingredient(Products.getByName('Parmesan Cheese'), 1),
+        new Ingredient(Products.getByName('Spinach'), 75),
+        new Ingredient(Products.getByName('Gnocchi'), 400),
+        new Ingredient(Products.getByName('Creme Fraiche'), 100),
+        new Ingredient(Products.getByName('Garlic'), 1),
+        new Ingredient(Products.getByName('Basil'), 1),
+      ]
+    ),
+    new Recipe(
       'Simple Brownie',
       'description',
-      'assets/images/main_img_0.jpeg',
+      'assets/images/Simple_Brownie.jpeg',
       [
         new Ingredient(Products.getByName('Dark Chocolate'), 250),
         new Ingredient(Products.getByName('Butter'), 200),
@@ -19,7 +79,7 @@ export class Recipes {
     new Recipe(
       'Baked Salmon With Vegetables',
       'description',
-      'assets/images/main_img_1.jpeg',
+      'assets/images/Baked_Salmon_with_Vegetables.jpeg',
       [
         new Ingredient(Products.getByName('Frozen Salmon'), 250),
         new Ingredient(Products.getByName('Frozen Vegetables'), 700),
@@ -28,7 +88,7 @@ export class Recipes {
     new Recipe(
       'Simple Burrito',
       'description',
-      'assets/images/main_img_2.jpeg',
+      'assets/images/Simple_Burrito.jpeg',
       [
         new Ingredient(Products.getByName('Salt'), 1),
         new Ingredient(Products.getByName('Tortillas'), 4),
@@ -45,7 +105,7 @@ export class Recipes {
     new Recipe(
       'American Pancakes',
       'description',
-      'assets/images/main_img_3.jpeg',
+      'assets/images/American_Pancakes.jpeg',
       [
         new Ingredient(Products.getByName('Eggs'), 1),
         new Ingredient(Products.getByName('Flour'), 300),
@@ -56,12 +116,6 @@ export class Recipes {
         new Ingredient(Products.getByName('Salt'), 1),
         new Ingredient(Products.getByName('Oil'), 30),
       ]
-    ),
-    new Recipe(
-      'Chicken Souflaki',
-      'description',
-      'assets/images/main_img_4.jpeg',
-      []
     ),
   ];
 
