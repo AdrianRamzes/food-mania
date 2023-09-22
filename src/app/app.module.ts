@@ -14,6 +14,7 @@ import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/lega
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
