@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService, RecipesListItem } from '../data/data.service';
+import { Recipe } from '../models/recipe.model';
 
 @Component({
   selector: 'recipes',
@@ -13,7 +14,7 @@ export class RecipesComponent {
 
   constructor(private dataService: DataService) {}
 
-  onCountChanged(recipeId: number, count: number): void {
-    this.dataService.setCount(recipeId, count);
+  onCountChanged(recipe: Recipe, count: number): void {
+    this.dataService.setCount(recipe, count);
   }
 }

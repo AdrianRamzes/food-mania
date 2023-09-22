@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { Product } from '../models/product.model';
 
-import { recipes } from './recipes.data';
+import { Recipes } from './recipes.data';
+import { Products } from './products.data';
 
 import * as _ from 'lodash';
-import { Products } from './products.data';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -15,32 +15,45 @@ export class DataService {
 
   private readonly recipesCountsStorageKey = 'recipesCounts';
   private readonly checkedProductsStorageKey = 'checkedProducts';
+  private readonly version = '0.1';
+  private readonly versionStorageKey = 'version';
 
-  private recipesCounts: number[] = [];
+  private recipesCounts: Map<string, number> = new Map();
   private productsTotalAmount: Map<string, number> = new Map();
   private checkedProducts: Set<string> = new Set();
 
   constructor() {
+    this.checkLocalStorage();
     this.loadRecipesCountsFromLocalStorage();
     this.loadCheckedProductsFromLocalStorage();
     this.update();
   }
 
-  public setCount(recipeId: number, count: number): void {
-    this.recipesCounts[recipeId] = count;
-    this.recipesList[recipeId].recipe.ingredients.forEach((i) => {
+  public setCount(recipe: Recipe, count: number): void {
+    this.recipesCounts.set(recipe.title, count);
+    if (count <= 0) {
+      this.recipesCounts.delete(recipe.title);
+    }
+    recipe.ingredients.forEach((i) => {
       this.checkedProducts.delete(i.product.name);
     });
     this.update();
   }
 
-  public addRecipeToList(recipeId: number): void {
-    this.setCount(recipeId, this.recipesCounts[recipeId] + 1);
+  public addRecipeToList(recipe: Recipe): void {
+    const count = this.recipesCounts.has(recipe.title)
+      ? this.recipesCounts.get(recipe.title)!
+      : 0;
+    this.setCount(recipe, count + 1);
   }
 
-  public removeRecipeFromList(recipeId: number): void {
-    if (this.recipesCounts[recipeId] > 0) {
-      this.setCount(recipeId, this.recipesCounts[recipeId] - 1);
+  public removeRecipeFromList(recipe: Recipe): void {
+    if (!this.recipesCounts.has(recipe.title)) {
+      return;
+    }
+    const count = this.recipesCounts.get(recipe.title)!;
+    if (count > 0) {
+      this.setCount(recipe, count - 1);
     }
   }
 
@@ -62,18 +75,30 @@ export class DataService {
 
   private update(): void {
     this.productsTotalAmount.clear();
-    recipes.forEach((recipe) => {
-      if (!this.recipesCounts[recipe.index]) {
-        return;
-      }
+    Recipes.all.forEach((recipe) => {
+      const count = this.recipesCounts.has(recipe.title)
+        ? this.recipesCounts.get(recipe.title)!
+        : 0;
+      if (count <= 0) return;
       recipe.ingredients.forEach((ingredient) => {
         let currentAmount =
           this.productsTotalAmount.get(ingredient.product.name) ?? 0;
         this.productsTotalAmount.set(
           ingredient.product.name,
-          currentAmount + ingredient.amount * this.recipesCounts[recipe.index]
+          currentAmount + ingredient.amount * count
         );
       });
+    });
+
+    this.recipesList = [];
+    Recipes.all.forEach((recipe) => {
+      const count = this.recipesCounts.has(recipe.title)
+        ? this.recipesCounts.get(recipe.title)
+        : 0;
+      this.recipesList.push({
+        recipe: recipe,
+        count: count,
+      } as RecipesListItem);
     });
 
     this.productsList = [];
@@ -85,13 +110,9 @@ export class DataService {
       } as ProductsListItem);
     });
 
-    this.recipesList = _.zip(recipes, this.recipesCounts).map(
-      (rc: any) => ({ recipe: rc[0], count: rc[1] } as RecipesListItem)
-    );
-
     localStorage.setItem(
       this.recipesCountsStorageKey,
-      JSON.stringify(this.recipesCounts)
+      JSON.stringify(Array.from(this.recipesCounts.entries()))
     );
     localStorage.setItem(
       this.checkedProductsStorageKey,
@@ -102,8 +123,7 @@ export class DataService {
   private loadRecipesCountsFromLocalStorage(): void {
     const jsonStr = localStorage.getItem(this.recipesCountsStorageKey);
     if (jsonStr) {
-      // it's ok to have a shorter array then the list of recipes
-      this.recipesCounts = JSON.parse(jsonStr) as number[];
+      this.recipesCounts = new Map<string, number>(JSON.parse(jsonStr));
     }
   }
   private loadCheckedProductsFromLocalStorage(): void {
@@ -111,6 +131,12 @@ export class DataService {
     if (jsonStr) {
       const checkedProducts = JSON.parse(jsonStr) as string[];
       checkedProducts.forEach((i) => this.checkedProducts.add(i));
+    }
+  }
+  private checkLocalStorage(): void {
+    if (localStorage.getItem(this.versionStorageKey) != this.version) {
+      localStorage.clear();
+      localStorage.setItem(this.versionStorageKey, this.version);
     }
   }
 }

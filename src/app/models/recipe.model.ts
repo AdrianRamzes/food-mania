@@ -1,7 +1,17 @@
 import { Product } from './product.model';
 
 export class Recipe {
-  public readonly index: number;
+  constructor(
+    title: string,
+    description: string,
+    imageUrl: string,
+    ingredients: Ingredient[]
+  ) {
+    this.title = title;
+    this.description = description;
+    this.imageUrl = imageUrl;
+    this.ingredients = ingredients;
+  }
   public readonly title: string;
   public readonly description: string;
   public readonly imageUrl: string;

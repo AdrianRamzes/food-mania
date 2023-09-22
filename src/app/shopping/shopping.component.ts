@@ -4,6 +4,7 @@ import {
   ProductsListItem,
   RecipesListItem,
 } from '../data/data.service';
+import { Recipe } from '../models/recipe.model';
 
 @Component({
   selector: 'shopping',
@@ -21,12 +22,12 @@ export class ShoppingComponent {
 
   constructor(private dataService: DataService) {}
 
-  onAddRecipeClick(recipeId: number): void {
-    this.dataService.addRecipeToList(recipeId);
+  onAddRecipeClick(recipe: Recipe): void {
+    this.dataService.addRecipeToList(recipe);
   }
 
-  onRemoveRecipeClick(recipeId: number): void {
-    this.dataService.removeRecipeFromList(recipeId);
+  onRemoveRecipeClick(recipe: Recipe): void {
+    this.dataService.removeRecipeFromList(recipe);
   }
 
   onProductChecked(p: ProductsListItem, event: any): void {

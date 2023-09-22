@@ -3,11 +3,11 @@
   <mat-list-item *ngFor="let item of selectedRecipes">
     <mat-icon mat-list-icon>restaurant</mat-icon>
     <div>{{ item.recipe.title }}</div>
-    <button mat-flat-button (click)="onRemoveRecipeClick(item.recipe.index)">
+    <button mat-flat-button (click)="onRemoveRecipeClick(item.recipe)">
       <mat-icon mat-list-icon>remove</mat-icon>
     </button>
     <span>{{ item.count }}</span>
-    <button mat-flat-button (click)="onAddRecipeClick(item.recipe.index)">
+    <button mat-flat-button (click)="onAddRecipeClick(item.recipe)">
       <mat-icon mat-list-icon>add</mat-icon>
     </button>
   </mat-list-item>
