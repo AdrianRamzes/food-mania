@@ -1,3 +1,5 @@
+import { Product } from './product.model';
+
 export class Recipe {
   public readonly index: number;
   public readonly title: string;
@@ -7,7 +9,12 @@ export class Recipe {
 }
 
 export class Ingredient {
-  public readonly productId: number;
+  constructor(product: Product, amount: number, optional: boolean = false) {
+    this.product = product;
+    this.amount = amount;
+    this.optional = optional;
+  }
+  public readonly product: Product;
   public readonly amount: number;
   public readonly optional: boolean;
 }

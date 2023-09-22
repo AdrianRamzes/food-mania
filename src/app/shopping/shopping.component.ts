@@ -31,9 +31,9 @@ export class ShoppingComponent {
 
   onProductChecked(p: ProductsListItem, event: any): void {
     if (event.checked) {
-      this.dataService.checkProduct(p.product.index);
+      this.dataService.checkProduct(p.product);
     } else {
-      this.dataService.uncheckProduct(p.product.index);
+      this.dataService.uncheckProduct(p.product);
     }
   }
 }

@@ -1,4 +1,5 @@
-import { Recipe } from '../models/recipe.model';
+import { Ingredient, Recipe } from '../models/recipe.model';
+import { Products } from '../data/products.data';
 
 export const recipes = [
   {
@@ -7,12 +8,13 @@ export const recipes = [
     description: 'description',
     imageUrl: 'assets/images/main_img_0.jpeg',
     ingredients: [
-      { productId: 0, amount: 250 }, // dark chocolate: 250g
-      { productId: 1, amount: 200 }, // butter: 200g
-      { productId: 2, amount: 3 }, // eggs: 3
-      { productId: 3, amount: 250 }, // sugar: 250g
-      { productId: 4, amount: 135 }, // flour: 135g
-      { productId: 5, amount: 1 }, // salt: 0g
+      new Ingredient(Products.Dark_Chocolate, 250),
+
+      new Ingredient(Products.Butter, 200),
+      new Ingredient(Products.Eggs, 3),
+      new Ingredient(Products.Sugar, 250),
+      new Ingredient(Products.Flour, 135),
+      new Ingredient(Products.Salt, 1),
     ],
   } as Recipe,
   {
@@ -21,8 +23,8 @@ export const recipes = [
     description: 'description',
     imageUrl: 'assets/images/main_img_1.jpeg',
     ingredients: [
-      { productId: 6, amount: 250 }, // Frozen Salmon: 250g
-      { productId: 7, amount: 700 }, // Frozen Vegetables: 700g
+      new Ingredient(Products.Frozen_Salmon, 250),
+      new Ingredient(Products.Frozen_Vegetables, 700),
     ],
   } as Recipe,
   {
@@ -31,16 +33,16 @@ export const recipes = [
     description: 'description',
     imageUrl: 'assets/images/main_img_2.jpeg',
     ingredients: [
-      { productId: 5, amount: 100 }, // Salt
-      { productId: 9, amount: 4 }, // Tortillas: 4
-      { productId: 10, amount: 350 }, // Sweet Corn (canned): 350g
-      { productId: 11, amount: 500 }, // Ground Beef: 500g
-      { productId: 12, amount: 1 }, // Avocado: 1
-      { productId: 13, amount: 1 }, // Onion: 1
-      { productId: 14, amount: 2 }, // Tomato: 2
-      { productId: 15, amount: 100 }, // Pepper
-      { productId: 16, amount: 200 }, // Red Bean (canned): 200g
-      { productId: 18, amount: 100 }, // Rice: 100g
+      new Ingredient(Products.Salt, 1),
+      new Ingredient(Products.Tortillas, 4),
+      new Ingredient(Products.Sweet_Corn_canned, 350),
+      new Ingredient(Products.Ground_Beef, 500),
+      new Ingredient(Products.Avocado, 1),
+      new Ingredient(Products.Onion, 1),
+      new Ingredient(Products.Tomato, 2),
+      new Ingredient(Products.Pepper, 100),
+      new Ingredient(Products.Red_Bean_canned, 200),
+      new Ingredient(Products.Rice, 100),
     ],
   } as Recipe,
   {
@@ -49,14 +51,21 @@ export const recipes = [
     description: 'description',
     imageUrl: 'assets/images/main_img_3.jpeg',
     ingredients: [
-      { productId: 2, amount: 1 }, // Eggs: 1
-      { productId: 4, amount: 300 }, // Flour: 300g
-      { productId: 20, amount: 300 }, // Buttermilk: 300ml
-      { productId: 24, amount: 300 }, // Powdered Sugar: 5g
-      { productId: 21, amount: 3 }, // Baking Powder: 3g
-      { productId: 23, amount: 2.5 }, // Baking Soda: 2.5g
-      { productId: 5, amount: 1 }, // Salt
-      { productId: 22, amount: 30 }, // Oil
+      new Ingredient(Products.Eggs, 1),
+      new Ingredient(Products.Flour, 300),
+      new Ingredient(Products.Butter, 300),
+      new Ingredient(Products.Powdered_Sugar, 300),
+      new Ingredient(Products.Baking_Powder, 3),
+      new Ingredient(Products.Baking_Soda, 2.5),
+      new Ingredient(Products.Salt, 1),
+      new Ingredient(Products.Oil, 30),
     ],
+  } as Recipe,
+  {
+    index: 3,
+    title: 'Chicken Souflaki',
+    description: 'description',
+    imageUrl: 'assets/images/main_img_4.jpeg',
+    ingredients: [],
   } as Recipe,
 ];

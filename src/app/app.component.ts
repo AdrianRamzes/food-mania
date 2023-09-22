@@ -8,7 +8,7 @@ import { DataService } from './data/data.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  currentView = View.recipes;
+  currentView = View.RECIPES;
 
   get recipesSum(): number {
     return _.sumBy(this.dataService.recipesList, 'count');
@@ -17,15 +17,15 @@ export class AppComponent {
   constructor(private dataService: DataService) {}
 
   onCartClick(): void {
-    this.currentView = View.shoppingList;
+    this.currentView = View.SHOPPING_LIST;
   }
 
   onMealClick(): void {
-    this.currentView = View.recipes;
+    this.currentView = View.RECIPES;
   }
 }
 
 enum View {
-  recipes = 'recipes',
-  shoppingList = 'shopping-list',
+  RECIPES = 'recipes',
+  SHOPPING_LIST = 'shopping-list',
 }

@@ -4,9 +4,9 @@ import { Recipe } from '../models/recipe.model';
 import { Product } from '../models/product.model';
 
 import { recipes } from './recipes.data';
-import { products } from './products.data';
 
 import * as _ from 'lodash';
+import { Products } from './products.data';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -17,8 +17,8 @@ export class DataService {
   private readonly checkedProductsStorageKey = 'checkedProducts';
 
   private recipesCounts: number[] = [];
-  private productsCounts: number[] = [];
-  private checkedProducts: Set<number> = new Set();
+  private productsTotalAmount: Map<string, number> = new Map();
+  private checkedProducts: Set<string> = new Set();
 
   constructor() {
     this.loadRecipesCountsFromLocalStorage();
@@ -29,89 +29,65 @@ export class DataService {
   public setCount(recipeId: number, count: number): void {
     this.recipesCounts[recipeId] = count;
     this.recipesList[recipeId].recipe.ingredients.forEach((i) => {
-      this.checkedProducts.delete(i.productId);
+      this.checkedProducts.delete(i.product.name);
     });
     this.update();
   }
 
   public addRecipeToList(recipeId: number): void {
-    this.recipesCounts[recipeId]++;
-    this.recipesList[recipeId].recipe.ingredients.forEach((i) => {
-      this.checkedProducts.delete(i.productId);
-    });
-    this.update();
+    this.setCount(recipeId, this.recipesCounts[recipeId] + 1);
   }
 
   public removeRecipeFromList(recipeId: number): void {
     if (this.recipesCounts[recipeId] > 0) {
-      this.recipesCounts[recipeId]--;
-      this.recipesList[recipeId].recipe.ingredients.forEach((i) => {
-        this.checkedProducts.delete(i.productId);
-      });
-      this.update();
+      this.setCount(recipeId, this.recipesCounts[recipeId] - 1);
     }
   }
 
-  public checkProduct(productId: number): void {
-    if (this.productsList[productId].checked) {
+  public checkProduct(product: Product): void {
+    if (this.checkedProducts.has(product.name)) {
       return;
     }
-    this.checkedProducts.add(productId);
-    this.productsList[productId] = {
-      product: this.productsList[productId].product,
-      amount: this.productsList[productId].amount,
-      checked: true,
-    };
-    localStorage.setItem(
-      this.checkedProductsStorageKey,
-      JSON.stringify(Array.from(this.checkedProducts.values()))
-    );
+    this.checkedProducts.add(product.name);
+    this.update();
   }
 
-  public uncheckProduct(productId: number): void {
-    if (!this.productsList[productId].checked) {
+  public uncheckProduct(product: Product): void {
+    if (!this.checkedProducts.has(product.name)) {
       return;
     }
-    this.checkedProducts.delete(productId);
-    this.productsList[productId] = {
-      product: this.productsList[productId].product,
-      amount: this.productsList[productId].amount,
-      checked: false,
-    };
-    localStorage.setItem(
-      this.checkedProductsStorageKey,
-      JSON.stringify(Array.from(this.checkedProducts.values()))
-    );
+    this.checkedProducts.delete(product.name);
+    this.update();
   }
 
   private update(): void {
-    this.productsCounts = [];
-    products.forEach((p) => {
-      this.productsCounts.push(0);
-    });
+    this.productsTotalAmount.clear();
     recipes.forEach((recipe) => {
+      if (!this.recipesCounts[recipe.index]) {
+        return;
+      }
       recipe.ingredients.forEach((ingredient) => {
-        this.productsCounts[ingredient.productId] +=
-          ingredient.amount * this.recipesCounts[recipe.index];
+        let currentAmount =
+          this.productsTotalAmount.get(ingredient.product.name) ?? 0;
+        this.productsTotalAmount.set(
+          ingredient.product.name,
+          currentAmount + ingredient.amount * this.recipesCounts[recipe.index]
+        );
       });
     });
-    this.productsList = _.zip(products, this.productsCounts).map(
-      (pc: any) =>
-        ({
-          product: pc[0],
-          amount: pc[1],
-          checked: this.checkedProducts.has(pc[0].index),
-        } as ProductsListItem)
-    );
+
+    this.productsList = [];
+    this.productsTotalAmount.forEach((totalAmount, productName) => {
+      this.productsList.push({
+        product: Products.getByName(productName),
+        amount: totalAmount,
+        checked: this.checkedProducts.has(productName),
+      } as ProductsListItem);
+    });
+
     this.recipesList = _.zip(recipes, this.recipesCounts).map(
       (rc: any) => ({ recipe: rc[0], count: rc[1] } as RecipesListItem)
     );
-
-    this.productsList
-      .filter((p) => p.checked && p.amount === 0)
-      .forEach((p) => {
-        this.checkedProducts.delete(p.product.index);
-      });
 
     localStorage.setItem(
       this.recipesCountsStorageKey,
@@ -133,8 +109,8 @@ export class DataService {
   private loadCheckedProductsFromLocalStorage(): void {
     const jsonStr = localStorage.getItem(this.checkedProductsStorageKey);
     if (jsonStr) {
-      const checkedIndexes = JSON.parse(jsonStr) as number[];
-      checkedIndexes.forEach((i) => this.checkedProducts.add(i));
+      const checkedProducts = JSON.parse(jsonStr) as string[];
+      checkedProducts.forEach((i) => this.checkedProducts.add(i));
     }
   }
 }

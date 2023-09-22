@@ -1,10 +1,13 @@
 export class Product {
-  public readonly index: number;
+  constructor(name: string, unit: Unit) {
+    this.name = name;
+    this.unit = unit;
+  }
   public readonly name: string;
-  public readonly unit: Units;
+  public readonly unit: Unit;
 }
 
-export enum Units {
+export enum Unit {
   piece,
   spice,
   g,
