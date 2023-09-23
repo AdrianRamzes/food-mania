@@ -64,6 +64,55 @@ export class Recipes {
       ]
     ),
     new Recipe(
+      'Bao Buns with Vegetables',
+      'description',
+      'assets/images/Bao_Buns_ith_Vegetables.jpeg',
+      [
+        new Ingredient(Products.getByName('Bao Buns'), 4),
+        new Ingredient(Products.getByName('Cucumber'), 1),
+        new Ingredient(Products.getByName('Mayo'), 1),
+        new Ingredient(Products.getByName('Garlic'), 1),
+        new Ingredient(Products.getByName('Carrot'), 100),
+        new Ingredient(Products.getByName('Potatoes'), 200),
+        new Ingredient(Products.getByName('Mushrooms'), 200),
+        new Ingredient(Products.getByName('Sriracha Sauce'), 1),
+        new Ingredient(Products.getByName('Sesame Oil'), 10),
+        new Ingredient(Products.getByName('Spring Onion'), 1),
+        new Ingredient(Products.getByName('Soya Sauce'), 10),
+        new Ingredient(Products.getByName('Mint'), 1),
+      ]
+    ),
+    new Recipe(
+      'Chicken in Apricot-Curry Sauce',
+      'description',
+      'assets/images/Chicken_in_Apricot_Curry_Sauce.jpeg',
+      [
+        new Ingredient(Products.getByName('Chicken Breast'), 240),
+        new Ingredient(Products.getByName('Garlic'), 1),
+        new Ingredient(Products.getByName('Wild Rice'), 100),
+        new Ingredient(Products.getByName('Sweet Paprika'), 1),
+        new Ingredient(Products.getByName('Onion'), 1),
+        new Ingredient(Products.getByName('Carrot'), 100),
+        new Ingredient(Products.getByName('Parsley'), 1),
+        new Ingredient(Products.getByName('Curry'), 1),
+        new Ingredient(Products.getByName('Dried Apricots'), 50),
+      ]
+    ),
+    new Recipe(
+      'Fettuccine Pasta with Salmon',
+      'description',
+      'assets/images/Fettuccine_Pasta_with_Salmon.jpeg',
+      [
+        new Ingredient(Products.getByName('Fettuccine Past'), 270),
+        new Ingredient(Products.getByName('Salmon'), 250),
+        new Ingredient(Products.getByName('Broccoli'), 250),
+        new Ingredient(Products.getByName('Spring Onion'), 2),
+        new Ingredient(Products.getByName('Garlic'), 1),
+        new Ingredient(Products.getByName('Half Cream'), 250),
+        new Ingredient(Products.getByName('Lemon'), 1),
+      ]
+    ),
+    new Recipe(
       'Simple Brownie',
       'description',
       'assets/images/Simple_Brownie.jpeg',
