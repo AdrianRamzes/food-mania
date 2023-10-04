@@ -13,7 +13,7 @@ export class Recipes {
         new Ingredient(Products.getByName('Garlic'), 1),
         new Ingredient(Products.getByName('Cucumber'), 1),
         new Ingredient(Products.getByName('Rice'), 150),
-        new Ingredient(Products.getByName('Tomato'), 150),
+        new Ingredient(Products.getByName('Tomato'), 2),
         new Ingredient(Products.getByName('Greek Yogurt'), 100),
         new Ingredient(Products.getByName('Olive Oil'), 50),
         new Ingredient(Products.getByName('Onion'), 1),
@@ -110,6 +110,36 @@ export class Recipes {
         new Ingredient(Products.getByName('Garlic'), 1),
         new Ingredient(Products.getByName('Half Cream'), 250),
         new Ingredient(Products.getByName('Lemon'), 1),
+      ]
+    ),
+    new Recipe(
+      'Mexican Salad with BBQ Chicken',
+      'description',
+      'assets/images/Mexican_Salad_with_Bbq_Chicken.jpeg',
+      [
+        new Ingredient(Products.getByName('Chicken Breast'), 350),
+        new Ingredient(Products.getByName('Salad'), 1),
+        new Ingredient(Products.getByName('Tomato'), 2),
+        new Ingredient(Products.getByName('Mayo'), 2),
+        new Ingredient(Products.getByName('Red Bean (canned)'), 200),
+        new Ingredient(Products.getByName('Lime'), 1),
+        new Ingredient(Products.getByName('BBQ Sauce'), 1),
+        new Ingredient(Products.getByName('Nachos'), 100),
+        new Ingredient(Products.getByName('Sweet Corn (canned)'), 150),
+      ]
+    ),
+    new Recipe(
+      'Spanish Baked Potatoes',
+      'description',
+      'assets/images/Spanish_Baked_Potatoes.jpeg',
+      [
+        new Ingredient(Products.getByName('Potatoes'), 500),
+        new Ingredient(Products.getByName('Feta Cheese'), 100),
+        new Ingredient(Products.getByName('Cherry Tomato'), 2),
+        new Ingredient(Products.getByName('Almond'), 10),
+        new Ingredient(Products.getByName('Natural Yogurt'), 100),
+        new Ingredient(Products.getByName('Rucola'), 100),
+        new Ingredient(Products.getByName('Dried Tomato'), 100),
       ]
     ),
     new Recipe(
