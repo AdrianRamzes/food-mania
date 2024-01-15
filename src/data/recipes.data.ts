@@ -6,7 +6,7 @@ export class Recipes {
     new Recipe(
       'Chicken Souflaki',
       'description',
-      'assets/images/Chicken_Souflaki.jpeg',
+      'images/Chicken_Souflaki.jpeg',
       [
         new Ingredient(Products.getByName('Chicken Breast'), 300),
         new Ingredient(Products.getByName('Lemon'), 1),
@@ -22,7 +22,7 @@ export class Recipes {
     new Recipe(
       'Coconut Soup with Beans',
       'description',
-      'assets/images/Coconut_Soup_with_Beans.jpeg',
+      'images/Coconut_Soup_with_Beans.jpeg',
       [
         new Ingredient(Products.getByName('Yellow Paprika'), 1),
         new Ingredient(Products.getByName('Garlic'), 1),
@@ -38,7 +38,7 @@ export class Recipes {
     new Recipe(
       'Mexican Chicken With Salad',
       'description',
-      'assets/images/Mexican_Chicken_with_Salad.jpeg',
+      'images/Mexican_Chicken_with_Salad.jpeg',
       [
         new Ingredient(Products.getByName('Chicken Breast'), 300),
         new Ingredient(Products.getByName('Salad'), 1),
@@ -52,7 +52,7 @@ export class Recipes {
     new Recipe(
       'Gnocchi with Spinach',
       'description',
-      'assets/images/Gnocchi_with_Spinach.jpeg',
+      'images/Gnocchi_with_Spinach.jpeg',
       [
         new Ingredient(Products.getByName('Pine Nuts'), 50),
         new Ingredient(Products.getByName('Parmesan Cheese'), 1),
@@ -66,7 +66,7 @@ export class Recipes {
     new Recipe(
       'Bao Buns with Vegetables',
       'description',
-      'assets/images/Bao_Buns_ith_Vegetables.jpeg',
+      'images/Bao_Buns_ith_Vegetables.jpeg',
       [
         new Ingredient(Products.getByName('Bao Buns'), 4),
         new Ingredient(Products.getByName('Cucumber'), 1),
@@ -85,7 +85,7 @@ export class Recipes {
     new Recipe(
       'Chicken in Apricot-Curry Sauce',
       'description',
-      'assets/images/Chicken_in_Apricot_Curry_Sauce.jpeg',
+      'images/Chicken_in_Apricot_Curry_Sauce.jpeg',
       [
         new Ingredient(Products.getByName('Chicken Breast'), 240),
         new Ingredient(Products.getByName('Garlic'), 1),
@@ -101,7 +101,7 @@ export class Recipes {
     new Recipe(
       'Fettuccine Pasta with Salmon',
       'description',
-      'assets/images/Fettuccine_Pasta_with_Salmon.jpeg',
+      'images/Fettuccine_Pasta_with_Salmon.jpeg',
       [
         new Ingredient(Products.getByName('Fettuccine Past'), 270),
         new Ingredient(Products.getByName('Salmon'), 250),
@@ -115,7 +115,7 @@ export class Recipes {
     new Recipe(
       'Mexican Salad with BBQ Chicken',
       'description',
-      'assets/images/Mexican_Salad_with_Bbq_Chicken.jpeg',
+      'images/Mexican_Salad_with_Bbq_Chicken.jpeg',
       [
         new Ingredient(Products.getByName('Chicken Breast'), 350),
         new Ingredient(Products.getByName('Salad'), 1),
@@ -131,7 +131,7 @@ export class Recipes {
     new Recipe(
       'Spanish Baked Potatoes',
       'description',
-      'assets/images/Spanish_Baked_Potatoes.jpeg',
+      'images/Spanish_Baked_Potatoes.jpeg',
       [
         new Ingredient(Products.getByName('Potatoes'), 500),
         new Ingredient(Products.getByName('Feta Cheese'), 100),
@@ -145,7 +145,7 @@ export class Recipes {
     new Recipe(
       'Simple Brownie',
       'description',
-      'assets/images/Simple_Brownie.jpeg',
+      'images/Simple_Brownie.jpeg',
       [
         new Ingredient(Products.getByName('Dark Chocolate'), 250),
         new Ingredient(Products.getByName('Butter'), 200),
@@ -158,7 +158,7 @@ export class Recipes {
     new Recipe(
       'Baked Salmon With Vegetables',
       'description',
-      'assets/images/Baked_Salmon_with_Vegetables.jpeg',
+      'images/Baked_Salmon_with_Vegetables.jpeg',
       [
         new Ingredient(Products.getByName('Frozen Salmon'), 250),
         new Ingredient(Products.getByName('Frozen Vegetables'), 700),
@@ -167,7 +167,7 @@ export class Recipes {
     new Recipe(
       'Simple Burrito',
       'description',
-      'assets/images/Simple_Burrito.jpeg',
+      'images/Simple_Burrito.jpeg',
       [
         new Ingredient(Products.getByName('Salt'), 1),
         new Ingredient(Products.getByName('Tortillas'), 4),
@@ -184,7 +184,7 @@ export class Recipes {
     new Recipe(
       'American Pancakes',
       'description',
-      'assets/images/American_Pancakes.jpeg',
+      'images/American_Pancakes.jpeg',
       [
         new Ingredient(Products.getByName('Eggs'), 1),
         new Ingredient(Products.getByName('Flour'), 300),

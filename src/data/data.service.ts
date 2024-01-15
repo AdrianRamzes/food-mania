@@ -1,31 +1,32 @@
-import { Injectable } from '@angular/core';
-
 import { Recipe } from '../models/recipe.model';
 import { Product } from '../models/product.model';
 
 import { Recipes } from './recipes.data';
 import { Products } from './products.data';
 
-import * as _ from 'lodash';
+import { writable } from 'svelte/store';
 
-@Injectable({ providedIn: 'root' })
 export class DataService {
-  public productsList: ProductsListItem[] = [];
-  public recipesList: RecipesListItem[] = [];
+  
+  public productsList = writable([] as ProductsListItem[]);
+  public recipesList = writable([] as RecipesListItem[]);
 
   private readonly recipesCountsStorageKey = 'recipesCounts';
   private readonly checkedProductsStorageKey = 'checkedProducts';
-  private readonly version = '0.1';
+  private readonly currentViewStorageKey = 'currentView';
+  private readonly version = '0.2';
   private readonly versionStorageKey = 'version';
 
   private recipesCounts: Map<string, number> = new Map();
   private productsTotalAmount: Map<string, number> = new Map();
   private checkedProducts: Set<string> = new Set();
+  private currentView: number = 0;
 
   constructor() {
     this.checkLocalStorage();
     this.loadRecipesCountsFromLocalStorage();
     this.loadCheckedProductsFromLocalStorage();
+    this.loadCurrentViewFromLocalStorage();
     this.update();
   }
 
@@ -73,6 +74,14 @@ export class DataService {
     this.update();
   }
 
+  public getCurrentView(): number {
+    return this.currentView;
+  }
+
+  public setCurrentView(value: number) {
+    localStorage.setItem(this.currentViewStorageKey, value.toString());
+  }
+
   private update(): void {
     this.productsTotalAmount.clear();
     Recipes.all.forEach((recipe) => {
@@ -90,24 +99,27 @@ export class DataService {
       });
     });
 
-    this.recipesList = [];
+    this.recipesList.set([]);
     Recipes.all.forEach((recipe) => {
       const count = this.recipesCounts.has(recipe.title)
         ? this.recipesCounts.get(recipe.title)
         : 0;
-      this.recipesList.push({
+      this.recipesList.update((items) => {items.push({
         recipe: recipe,
         count: count,
-      } as RecipesListItem);
+      } as RecipesListItem); return items});
     });
 
-    this.productsList = [];
+    this.productsList.set([]);
     this.productsTotalAmount.forEach((totalAmount, productName) => {
-      this.productsList.push({
-        product: Products.getByName(productName),
-        amount: totalAmount,
-        checked: this.checkedProducts.has(productName),
-      } as ProductsListItem);
+      this.productsList.update((items) => {
+        items.push({
+          product: Products.getByName(productName),
+          amount: totalAmount,
+          checked: this.checkedProducts.has(productName),
+        } as ProductsListItem)
+        return items;
+      });
     });
 
     localStorage.setItem(
@@ -133,6 +145,9 @@ export class DataService {
       checkedProducts.forEach((i) => this.checkedProducts.add(i));
     }
   }
+  private loadCurrentViewFromLocalStorage() {
+    this.currentView = parseInt(localStorage.getItem(this.currentViewStorageKey) ?? "0");
+  }
   private checkLocalStorage(): void {
     if (localStorage.getItem(this.versionStorageKey) != this.version) {
       localStorage.clear();
@@ -145,9 +160,20 @@ export class ProductsListItem {
   public readonly product: Product;
   public readonly amount: number;
   public readonly checked: boolean;
+
+  constructor(product: Product, amount: number, checked: boolean) {
+    this.product = product;
+    this.amount = amount;
+    this.checked = checked;
+  }
 }
 
 export class RecipesListItem {
   public readonly recipe: Recipe;
   public readonly count: number;
+
+  constructor(recipe: Recipe, count: number) {
+    this.recipe = recipe;
+    this.count = count;
+  }
 }
