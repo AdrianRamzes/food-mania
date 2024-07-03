@@ -27,9 +27,9 @@
     {#each selectedRecipes as r}
     <li>
         <span>{r.recipe.title}</span>
-        <button on:click={() => onMinusClick(r)}>-</button>
+        <button on:click={() => onMinusClick(r)}><i class="fa-solid fa-minus"></i></button>
         <span>{r.count}</span>
-        <button on:click={() => onPlusClick(r)}>+</button>
+        <button on:click={() => onPlusClick(r)}><i class="fa-solid fa-plus"></i></button>
     </li>
     {/each}
 </ul>

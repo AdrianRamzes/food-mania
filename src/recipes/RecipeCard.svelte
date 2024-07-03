@@ -32,9 +32,9 @@
         <img src="{recipe.imageUrl}" alt="recipe">
     </div>
     <div class="card-actions">
-        <button on:click={onMinusClick}>-</button>
+        <button on:click={onMinusClick}><i class="fa-solid fa-minus"></i></button>
         <p>{count}</p>
-        <button on:click={onPlusClick}>+</button>
+        <button on:click={onPlusClick}><i class="fa-solid fa-plus"></i></button>
     </div>
 </div>
 

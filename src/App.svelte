@@ -30,10 +30,10 @@
   <div class="floating-toolbar">
     {#if currentView == View.Recipes}
     <h1>Select meals</h1>
-    <button on:click={onCartClick}>Cart</button>
+    <button on:click={onCartClick}><i class="fa-solid fa-cart-shopping"></i></button>
     {:else if currentView == View.ShoppingList}
     <h1>Shopping list</h1>
-    <button on:click={onMealClick}>Meal</button>
+    <button on:click={onMealClick}><i class="fa-solid fa-utensils"></i></button>
     {/if}
   </div>
   <div class="main-view">
@@ -69,6 +69,7 @@
     height: 48px;
     border-radius: 24px;
     background-color: white;
+    font-size: 24px;
 
     border: solid 1px grey;
 
