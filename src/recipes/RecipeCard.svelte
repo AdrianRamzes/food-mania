@@ -7,6 +7,14 @@
 
     const dispatch = createEventDispatcher();
 
+    function onUncheckClick() {
+        count = 0;
+        dispatch("countChange", {
+            recipe: recipe,
+            count: count,
+        });
+    }
+
     function onMinusClick() {
         count = Math.max(count - 1, 0);
         dispatch("countChange", {
@@ -30,6 +38,11 @@
     </div>
     <div class="card-content">
         <img src="{recipe.imageUrl}" alt="recipe">
+        {#if count}
+        <button on:click={onUncheckClick}><i class="fa-solid fa-check"></i></button>
+        {:else}
+        <button on:click={onPlusClick}><i class="fa-solid fa-cart-plus"></i></button>
+        {/if}
     </div>
     <div class="card-actions">
         <button on:click={onMinusClick}><i class="fa-solid fa-minus"></i></button>
@@ -77,6 +90,24 @@
         height: 300px;
         object-fit: cover;
         margin: 0 -16px 16px -16px;
+
+        button {
+            position: absolute;
+            top: 72%;
+            left: 86%;
+
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            border: solid 1px lightgray;
+            border-radius: 16px;
+            &:hover {
+                background-color: lightgray;
+            }
+            &:active {
+                border: solid 1px grey;
+            }
+        }
     }
 
     .card-actions {
