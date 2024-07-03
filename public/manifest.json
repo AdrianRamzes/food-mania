@@ -1,0 +1,8 @@
+{
+    "name": "Food Mania",
+    "display": "standalone",
+    "start_url": "./",
+    "scope": ".",
+    "background_color": "#ffffff",
+    "description": "A PWA Food Mania app."
+}
