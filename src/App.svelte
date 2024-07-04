@@ -68,6 +68,8 @@
     font-size: 24px;
 
     border: solid 1px grey;
+    color: black; // safari/iphone
+    padding: 0; // safari/iphone
 
     &:hover {
       background-color: lightgray;

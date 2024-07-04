@@ -76,6 +76,8 @@
 
             width: 64px;
             height: 64px;
+            color: black; // safari/iphone
+            padding: 0; // safari/iphone
             background-color: white;
             border: solid 1px lightgray;
             border-radius: 32px;
