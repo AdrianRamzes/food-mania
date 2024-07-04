@@ -13,15 +13,11 @@
 
   function onCartClick() {
     currentView = View.ShoppingList;
-    console.log('currentView');
-    console.log(currentView);
     setCurrentView(currentView);
   }
 
   function onMealClick() {
     currentView = View.Recipes;
-    console.log('currentView');
-    console.log(currentView);
     setCurrentView(currentView);
   }
 </script>
