@@ -1,8 +1,8 @@
 <script lang="ts">
   import Shopping from "./shopping/Shopping.svelte";
   import Recipes from "./recipes/Recipes.svelte";
-    import { getCurrentView, setCurrentView } from "./data/data.exports";
-
+  import { getCurrentView, recipesList, setCurrentView } from "./data/data.exports";
+  import type { RecipesListItem } from "./data/data.service";
 
   enum View {
     Recipes,
@@ -10,6 +10,8 @@
   }
 
   let currentView = getCurrentView();
+  let searchText = '';
+  $: filteredRecipesList = filterBySearchText($recipesList, searchText);
 
   function onCartClick() {
     currentView = View.ShoppingList;
@@ -20,12 +22,21 @@
     currentView = View.Recipes;
     setCurrentView(currentView);
   }
+
+  function filterBySearchText(recipesList: RecipesListItem[], searchText: string): RecipesListItem[] {
+    return recipesList.filter(r => {
+      return searchText.length == 0
+        || r.recipe.description.toLowerCase().includes(searchText) 
+        || r.recipe.title.toLowerCase().includes(searchText)
+        || r.recipe.ingredients.some(i => i.product.name.toLowerCase().includes(searchText));
+    });
+  }
 </script>
 
 <main>
   <div class="floating-toolbar">
     {#if currentView == View.Recipes}
-    <h1>Select meals</h1>
+    <input type="text" class="search-box" placeholder="Search..." bind:value={searchText}/>
     <button on:click={onCartClick}><i class="fa-solid fa-cart-shopping"></i></button>
     {:else if currentView == View.ShoppingList}
     <h1>Shopping list</h1>
@@ -34,7 +45,7 @@
   </div>
   <div class="main-view">
     {#if currentView == View.Recipes}
-    <Recipes></Recipes>
+    <Recipes recipesList={filteredRecipesList}></Recipes>
     {:else if currentView == View.ShoppingList}
     <Shopping></Shopping>
     {/if}
@@ -58,6 +69,15 @@
 
   h1 {
     font-family: Roboto,sans-serif;
+  }
+
+  .search-box {
+    width: 72%;
+    height: 40px;
+    padding-left: 16px;
+
+    border-radius: 16px;
+    font-size: 24px;
   }
 
   button {
