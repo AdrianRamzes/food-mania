@@ -24,11 +24,12 @@
   }
 
   function filterBySearchText(recipesList: RecipesListItem[], searchText: string): RecipesListItem[] {
+    if(searchText.length == 0) return recipesList;
+
+    const searchWords = searchText.toLocaleLowerCase().split(/\s/);
     return recipesList.filter(r => {
-      return searchText.length == 0
-        || r.recipe.description.toLowerCase().includes(searchText) 
-        || r.recipe.title.toLowerCase().includes(searchText)
-        || r.recipe.ingredients.some(i => i.product.name.toLowerCase().includes(searchText));
+      const combined = (r.recipe.title + r.recipe.description + r.recipe.ingredients.map(i => i.product.name).join()).toLocaleLowerCase();
+      return searchWords.every(w => combined.includes(w));
     });
   }
 </script>
