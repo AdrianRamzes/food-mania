@@ -11,7 +11,7 @@ export class Recipes {
         new Ingredient(Products.getByName("Pumpkin Puree"), 320),
         new Ingredient(Products.getByName("Quark"), 150),
         new Ingredient(Products.getByName("Oatmeal"), 200),
-        new Ingredient(Products.getByName("Egg"), 1),
+        new Ingredient(Products.getByName("Eggs"), 1),
         new Ingredient(Products.getByName("Flour"), 200),
         new Ingredient(Products.getByName("Honey"), 12),
         new Ingredient(Products.getByName("Oil"), 6),

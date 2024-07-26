@@ -40,8 +40,8 @@
     <input type="text" class="search-box" placeholder="Search..." bind:value={searchText}/>
     <button on:click={onCartClick}><i class="fa-solid fa-cart-shopping"></i></button>
     {:else if currentView == View.ShoppingList}
+    <button on:click={onMealClick}><i class="fa-solid fa-arrow-left"></i></button>
     <h1>Shopping list</h1>
-    <button on:click={onMealClick}><i class="fa-solid fa-utensils"></i></button>
     {/if}
   </div>
   <div class="main-view">
