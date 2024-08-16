@@ -1,25 +1,39 @@
 <script lang="ts">
   import Shopping from "./shopping/Shopping.svelte";
   import Recipes from "./recipes/Recipes.svelte";
-  import { getCurrentView, recipesList, setCurrentView } from "./data/data.exports";
+  import RecipePage from "./recipes/RecipePage.svelte";
+  import { getCurrentView, recipesList, selectedRecipe, setCurrentView } from "./data/data.exports";
   import type { RecipesListItem } from "./data/data.service";
+  import { Recipe } from "./models/recipe.model";
 
   enum View {
     Recipes,
     ShoppingList,
+    RecipeDetails,
   }
 
-  let currentView = getCurrentView();
+  let currentView = window.location.hash.length ? View.RecipeDetails : getCurrentView();
   let searchText = '';
   $: filteredRecipesList = filterBySearchText($recipesList, searchText);
 
   function onCartClick() {
     currentView = View.ShoppingList;
+    removeHash();
     setCurrentView(currentView);
   }
 
   function onMealClick() {
     currentView = View.Recipes;
+    removeHash();
+    setCurrentView(currentView);
+  }
+
+  function onRecipeDetailsClick(e: CustomEvent) {
+    const recipe = (e.detail.recipe as Recipe);
+    $selectedRecipe = recipe;
+
+    currentView = View.RecipeDetails;
+    window.location.hash = recipe.title;
     setCurrentView(currentView);
   }
 
@@ -32,6 +46,11 @@
       return searchWords.every(w => combined.includes(w));
     });
   }
+
+  function removeHash() {
+    const newUrl = window.location.href.split('#')[0];
+    history.replaceState({}, document.title, newUrl);
+}
 </script>
 
 <main>
@@ -42,13 +61,18 @@
     {:else if currentView == View.ShoppingList}
     <button on:click={onMealClick}><i class="fa-solid fa-arrow-left"></i></button>
     <h1>Shopping list</h1>
+    {:else if currentView == View.RecipeDetails}
+    <button on:click={onMealClick}><i class="fa-solid fa-arrow-left"></i></button>
+    <h1>Recipe</h1>
     {/if}
   </div>
   <div class="main-view">
     {#if currentView == View.Recipes}
-    <Recipes recipesList={filteredRecipesList}></Recipes>
+    <Recipes recipesList={filteredRecipesList} on:recipeClicked={onRecipeDetailsClick}></Recipes>
     {:else if currentView == View.ShoppingList}
     <Shopping></Shopping>
+    {:else if currentView == View.RecipeDetails}
+    <RecipePage recipe={$selectedRecipe}></RecipePage>
     {/if}
   </div>
 </main>

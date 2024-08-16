@@ -22,11 +22,16 @@
             count: count,
         });
     }
+
+    function onClick() {
+        dispatch("clicked", { recipe: recipe });
+        console.log('e');
+    }
 </script>
 
 <div class="card">
     <div class="card-image">
-        <img src="{recipe.imageUrl}" alt="recipe">
+        <img src="{recipe.imageUrl}" alt="recipe" on:click={onClick}>
         {#if count}
         <button on:click={onRemoveFromCartClick} class="checked-button"><i class="fa-solid fa-check"></i></button>
         {:else}

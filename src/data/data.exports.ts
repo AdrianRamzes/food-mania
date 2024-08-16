@@ -5,25 +5,26 @@ const dataService = new DataService();
 
 export const recipesList = dataService.recipesList;
 export const productsList = dataService.productsList;
+export const selectedRecipe = dataService.selectedRecipe;
 
 export function addRecipeToList(recipe: Recipe) {
-    return dataService.addRecipeToList(recipe);
+  return dataService.addRecipeToList(recipe);
 }
 export function removeRecipeFromList(recipe: Recipe) {
-    return dataService.removeRecipeFromList(recipe);
-} 
+  return dataService.removeRecipeFromList(recipe);
+}
 export function setCount(recipe: Recipe, count: number) {
-    return dataService.setCount(recipe, count);
+  return dataService.setCount(recipe, count);
 }
 export function checkProduct(product: ProductsListItem) {
-    return dataService.checkProduct(product.product);
+  return dataService.checkProduct(product.product);
 }
 export function uncheckProduct(product: ProductsListItem) {
-    return dataService.uncheckProduct(product.product);
+  return dataService.uncheckProduct(product.product);
 }
 export function getCurrentView(): number {
-    return dataService.getCurrentView();
+  return dataService.getCurrentView();
 }
 export function setCurrentView(value: number): void {
-    return dataService.setCurrentView(value);
+  return dataService.setCurrentView(value);
 }

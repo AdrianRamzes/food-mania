@@ -1,21 +1,21 @@
-import { Recipe } from '../models/recipe.model';
-import { Product } from '../models/product.model';
+import { Recipe } from "../models/recipe.model";
+import { Product } from "../models/product.model";
 
-import { Recipes } from './recipes.data';
-import { Products } from './products.data';
+import { Recipes } from "./recipes.data";
+import { Products } from "./products.data";
 
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 export class DataService {
-  
   public productsList = writable([] as ProductsListItem[]);
   public recipesList = writable([] as RecipesListItem[]);
+  public selectedRecipe = writable<Recipe | null>(null);
 
-  private readonly recipesCountsStorageKey = 'recipesCounts';
-  private readonly checkedProductsStorageKey = 'checkedProducts';
-  private readonly currentViewStorageKey = 'currentView';
-  private readonly version = '0.2';
-  private readonly versionStorageKey = 'version';
+  private readonly recipesCountsStorageKey = "recipesCounts";
+  private readonly checkedProductsStorageKey = "checkedProducts";
+  private readonly currentViewStorageKey = "currentView";
+  private readonly version = "0.2";
+  private readonly versionStorageKey = "version";
 
   private recipesCounts: Map<string, number> = new Map();
   private productsTotalAmount: Map<string, number> = new Map();
@@ -104,10 +104,13 @@ export class DataService {
       const count = this.recipesCounts.has(recipe.title)
         ? this.recipesCounts.get(recipe.title)
         : 0;
-      this.recipesList.update((items) => {items.push({
-        recipe: recipe,
-        count: count,
-      } as RecipesListItem); return items});
+      this.recipesList.update((items) => {
+        items.push({
+          recipe: recipe,
+          count: count,
+        } as RecipesListItem);
+        return items;
+      });
     });
 
     this.productsList.set([]);
@@ -117,7 +120,7 @@ export class DataService {
           product: Products.getByName(productName),
           amount: totalAmount,
           checked: this.checkedProducts.has(productName),
-        } as ProductsListItem)
+        } as ProductsListItem);
         return items;
       });
     });
@@ -146,7 +149,16 @@ export class DataService {
     }
   }
   private loadCurrentViewFromLocalStorage() {
-    this.currentView = parseInt(localStorage.getItem(this.currentViewStorageKey) ?? "0");
+    const parsedValue = parseInt(
+      localStorage.getItem(this.currentViewStorageKey) ?? "0"
+    );
+    if (window.location.hash.length > 0) {
+      const recipeTitle = window.location.hash.slice(1).replaceAll("%20", " ");
+      this.selectedRecipe.set(
+        Recipes.all.find((r) => r.title == recipeTitle) ?? null
+      );
+    }
+    this.currentView = parsedValue;
   }
   private checkLocalStorage(): void {
     if (localStorage.getItem(this.versionStorageKey) != this.version) {
