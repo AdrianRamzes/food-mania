@@ -38,7 +38,7 @@
         <button on:click={onAddToCartClick}><i class="fa-solid fa-cart-plus"></i></button>
         {/if}
     </div>
-    <div class="card-title">
+    <div class="card-title" on:click={onClick}>
         <h3>{recipe.title}</h3>
     </div>
 </div>

@@ -5,15 +5,16 @@
 
 </script>
 
-{#if recipe}    
-<h1>Ingredients:</h1>
+{#if recipe}
+<h1>{recipe.title}</h1>
+<h2>Ingredients:</h2>
 <ol>
     {#each recipe.ingredients as ingredient}
     <li>{ingredient.product.name}</li>
     {/each }
 </ol>
 
-<h1>Steps:</h1>
+<h2>Steps:</h2>
 <ol>
     {#each recipe.steps as step}
     <li>{step}</li>
