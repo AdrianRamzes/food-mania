@@ -4,7 +4,7 @@ import { Products } from "../data/products.data";
 export class Recipes {
   public static readonly all = [
     new Recipe(
-      "Pumpkin Pancakes with Cheese",
+      "Placuszki dyniowe z serem",
       "description",
       [
         `Do miski przełóż płatki owsiane, puree z dyni, serek, miód. Wymieszaj.
@@ -34,7 +34,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Pea and Basil Pesto",
+      "Pesto z groszku i bazylii",
       "description",
       [
         "Nastaw wodę na makaron i ugotuj go.",
@@ -58,25 +58,19 @@ export class Recipes {
         new Ingredient(Products.getByName("Makaron penne"), 200),
       ]
     ),
+    new Recipe("Souflaki", "description", [], "images/Chicken_Souflaki.jpeg", [
+      new Ingredient(Products.getByName("Pierś z kurczaka"), 300),
+      new Ingredient(Products.getByName("Cytryna"), 1),
+      new Ingredient(Products.getByName("Czosnek"), 1),
+      new Ingredient(Products.getByName("Ogórek"), 1),
+      new Ingredient(Products.getByName("Ryż"), 150),
+      new Ingredient(Products.getByName("Pomidor"), 2),
+      new Ingredient(Products.getByName("Jogurt grecki"), 100),
+      new Ingredient(Products.getByName("Oliwa z oliwek"), 50),
+      new Ingredient(Products.getByName("Cebula"), 1),
+    ]),
     new Recipe(
-      "Chicken Souflaki",
-      "description",
-      [],
-      "images/Chicken_Souflaki.jpeg",
-      [
-        new Ingredient(Products.getByName("Pierś z kurczaka"), 300),
-        new Ingredient(Products.getByName("Cytryna"), 1),
-        new Ingredient(Products.getByName("Czosnek"), 1),
-        new Ingredient(Products.getByName("Ogórek"), 1),
-        new Ingredient(Products.getByName("Ryż"), 150),
-        new Ingredient(Products.getByName("Pomidor"), 2),
-        new Ingredient(Products.getByName("Jogurt grecki"), 100),
-        new Ingredient(Products.getByName("Oliwa z oliwek"), 50),
-        new Ingredient(Products.getByName("Cebula"), 1),
-      ]
-    ),
-    new Recipe(
-      "Coconut Soup with Beans",
+      "Zupa kokosowa z fasolą",
       "description",
       [],
       "images/Coconut_Soup_with_Beans.jpeg",
@@ -93,7 +87,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Mexican Chicken With Salad",
+      "Meksykański kurczak z sałatą",
       "description",
       [],
       "images/Mexican_Chicken_with_Salad.jpeg",
@@ -108,7 +102,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Gnocchi with Spinach",
+      "Gnocchi ze szpinakiem",
       "description",
       [],
       "images/Gnocchi_with_Spinach.jpeg",
@@ -123,7 +117,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Bao Buns with Vegetables",
+      "Bułeczki Bao z warzywami",
       "description",
       [],
       "images/Bao_Buns_ith_Vegetables.jpeg",
@@ -143,7 +137,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Chicken in Apricot-Curry Sauce",
+      "Kurczak w sosie morelowo-curry",
       "description",
       [],
       "images/Chicken_in_Apricot_Curry_Sauce.jpeg",
@@ -160,7 +154,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Fettuccine Pasta with Salmon",
+      "Makaron fettuccine z łososiem",
       "description",
       [],
       "images/Fettuccine_Pasta_with_Salmon.jpeg",
@@ -175,7 +169,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Mexican Salad with BBQ Chicken",
+      "Maksykańska sałatka z kurczakiem BBQ",
       "description",
       [],
       "images/Mexican_Salad_with_Bbq_Chicken.jpeg",
@@ -192,7 +186,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Spanish Baked Potatoes",
+      "Hiszpańskie pieczone pomidory",
       "description",
       [],
       "images/Spanish_Baked_Potatoes.jpeg",
@@ -207,7 +201,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Simple Brownie",
+      "Proste Brownie",
       "description",
       [],
       "images/Simple_Brownie.jpeg",
@@ -221,7 +215,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Baked Salmon With Vegetables",
+      "Pieczony łosoś z warzywami",
       "description",
       [],
       "images/Baked_Salmon_with_Vegetables.jpeg",
@@ -231,7 +225,7 @@ export class Recipes {
       ]
     ),
     new Recipe(
-      "Simple Burrito",
+      "Proste Burrito",
       "description",
       [],
       "images/Simple_Burrito.jpeg",

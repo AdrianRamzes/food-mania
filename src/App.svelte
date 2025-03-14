@@ -56,11 +56,11 @@
 <main>
   <div class="floating-toolbar">
     {#if currentView == View.Recipes}
-    <input type="text" class="search-box" placeholder="Search..." bind:value={searchText}/>
+    <input type="text" class="search-box" placeholder="Szukaj..." bind:value={searchText}/>
     <button on:click={onCartClick}><i class="fa-solid fa-cart-shopping"></i></button>
     {:else if currentView == View.ShoppingList}
     <button on:click={onMealClick}><i class="fa-solid fa-arrow-left"></i></button>
-    <h1>Shopping list</h1>
+    <h1>Lista zakupów</h1>
     {:else if currentView == View.RecipeDetails}
     <button on:click={onMealClick}><i class="fa-solid fa-arrow-left"></i></button>
     <h1>Recipe</h1>

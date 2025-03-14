@@ -22,7 +22,7 @@
     }
 </script>
 
-<h1>Meals:</h1>
+<h1>Posiłki:</h1>
 <ul>
     {#each selectedRecipes as r}
     <li>
@@ -33,7 +33,7 @@
     </li>
     {/each}
 </ul>
-<h1>Products:</h1>
+<h1>Produkty:</h1>
 <ul>
     {#each neededProductsList as p}
     <li class:checked={p.checked}>
